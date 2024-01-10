@@ -1,7 +1,7 @@
 # startup
 startup is sweet!
 
-nic
+nice
 
 love this
 
