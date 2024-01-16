@@ -7,3 +7,7 @@ Learned how to use github today. It is pretty simple. I will use `git clone` wit
 ## January 15
 
 Created an AWS server instance. It is running nonstop. Should be free. I also got an elastic IP address and associated it with the instance so that the address does not change. To ssh into my server, I use this command `ssh -i production.pem ubuntu@52.44.90.249`. To do this, I need to be in the same directoy with production.pem. This is my private and public key to login. Need to make sure to disassociate the elastic IP at the end of the semester.
+
+## January 16
+
+Today I got the domain name **mypeoplenotes.com**. I then attached it to my ip address. I did this through Route 53 on AWS. I purchased the domain then I went to my domain name and added records. I used the ip address and also made it so all subdomains will use the same ip address.
