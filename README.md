@@ -39,4 +39,13 @@ You remember someone, but you can't quite get their name? Or they told you somet
 
 * **React** - Application ported to use the React web framework.
 
+## HTML deliverable
 
+For this deliverable I built out the structure of my application using HTML.
+
+- **HTML Pages** - Two HTML pages. One has the login and the other one has all of the people notes.
+- **Links** - The login page automatically links to the people notes page (with login). The notes page has no links.
+- **Text** - There is text indicating the person's name, notes and the list of people on the lhs of the page.
+- **Images** - I put in a picture for each person that I add to the notes.
+- **DB/Login** - Username and password to login. The people notes will be stored in a database.
+- **WebSocket** - The total number of users on the site at one point in time.
