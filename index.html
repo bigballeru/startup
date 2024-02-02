@@ -1,7 +1,20 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <meta charset="UTF-8" />
+        <!-- Tell browsers not to scale the viewport automatically -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Login Page</title>
+    
+        <link rel="stylesheet" href="main.css" />
+    
+        <!-- Include bootstrap CSS framework -->
+        <link
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
+          crossorigin="anonymous"
+        />
     </head>
 
     <body>
@@ -9,16 +22,18 @@
             <h1>mypeoplenotes.com</h1>
         </header>
         <main>
-            <h2>Login</h2>
-            <form>
-                <input type="email" placeholder="Email">
-                <input type="password" placeholder="Password">
-                <button type="button"><a href="homepage.html">Login</a></button>
-            </form>
-            <p>
-                Don't have an account?
-                <a href="javascript:void(0)">Sign Up</a>
-            </p>
+            <div id="login">
+                <h2>Login</h2>
+                <form>
+                    <input type="email" placeholder="Email">
+                    <input type="password" placeholder="Password">
+                    <button type="button"><a href="homepage.html">Login</a></button>
+                </form>
+                <p>
+                    Don't have an account?
+                    <a href="javascript:void(0)">Sign Up</a>
+                </p>
+            </div>
         </main>
         <footer>
             <a href="https://github.com/bigballeru/startup">Gabe Ure's Github</a>

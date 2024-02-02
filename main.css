@@ -1,0 +1,96 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: rgb(243, 244, 246);
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+header {
+    text-align: left;
+    padding: 1rem;
+    border-bottom: 1px solid rgb(229, 231, 235);
+}
+
+footer {
+    text-align: center;
+    padding: 1rem;
+}
+
+header h1 {
+    margin: 0;
+    color: #333;
+}
+
+main {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#login {
+    background: #fff;
+    padding: 2rem;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    width: 100%;
+}
+
+h2 {
+    text-emphasis: bold;
+    text-align: center;
+    color: #333;
+    padding-bottom: 1rem;
+}
+
+form input {
+    width: 100%;
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box;
+    background-color: rgb(229, 231, 235);
+}
+
+form button {
+    width: 100%;
+    padding: 0.75rem;
+    border: none;
+    color: #fff;
+    background-color: #007bff;
+    border-radius: 5px;
+    margin-bottom: 1rem;
+}
+
+form button a {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
+p {
+    text-align: center;
+    color: #666;
+    padding-top: 1rem;
+}
+
+p a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+/* Footer styling */
+footer a {
+    color: #666;
+    text-decoration: none;
+}
+
+@media (max-width: 768px) {
+    form {
+        padding: 1rem;
+    }
+}

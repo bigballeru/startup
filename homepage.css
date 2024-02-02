@@ -1,0 +1,65 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: rgb(243, 244, 246);
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+header {
+    text-align: center;
+    padding: 1rem;
+    border-bottom: 1px solid rgb(229, 231, 235);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(250, 251, 251);
+}
+
+header input {
+    flex-grow: 1;
+    margin-right: 0.5rem;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 0.5rem;
+}
+
+header button {
+    padding: 0.5rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 0.5rem;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+}
+
+main {
+    display: flex;
+    flex-direction: row;
+    flex-grow: 1;
+}
+
+#people {
+    display: flex;
+    flex-grow: .05;
+    flex-direction: column;
+    border-right: 1px solid rgb(229, 231, 235);
+    background-color: rgb(250, 251, 251);
+}
+
+#notes {
+    flex-grow: .95;
+}
+
+#notes div #list {
+    display: flex;
+    flex-direction: column;
+}
+
+footer {
+    border-top: 1px solid rgb(229, 231, 235);
+    text-align: center;
+    align-items: center;
+    background-color: rgb(250, 251, 251);
+}
