@@ -49,3 +49,14 @@ For this deliverable I built out the structure of my application using HTML.
 - **Images** - I put in a picture for each person that I add to the notes.
 - **DB/Login** - Username and password to login. The people notes will be stored in a database.
 - **WebSocket** - The total number of users on the site at one point in time.
+
+## CSS deliverable
+
+For this deliverable I properly styled the application into its final appearance.
+
+- **Header, footer, and main content body**
+- **Navigation elements** - Pretty simple navigation. It is just a two page site and the login links to the notes page.
+- **Responsive to window resizing** - My app looks good in all window sizes.
+- **Application elements** - I tried to use good coloring and whitespace so it looks nice and clean.
+- **Application text content** - I put in the bootstrap CSS, so there are consistent fonts throughout it.
+- **Application images** - Just style my image as a circle like I would find it in a contacts app.
