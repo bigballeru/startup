@@ -56,7 +56,7 @@ For this deliverable I properly styled the application into its final appearance
 
 - **Header, footer, and main content body**
 - **Navigation elements** - Pretty simple navigation. It is just a two page site and the login links to the notes page.
-- **Responsive to window resizing** - My app looks good in all window sizes.
+- **Responsive to window resizing** - My app looks good in all window sizes. I used @media to get rid of the list of people and the footer if it is on a smartphone.
 - **Application elements** - I tried to use good coloring and whitespace so it looks nice and clean.
 - **Application text content** - I put in the bootstrap CSS, so there are consistent fonts throughout it.
 - **Application images** - Just style my image as a circle like I would find it in a contacts app.
