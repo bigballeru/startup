@@ -42,14 +42,84 @@ main {
 
 #people {
     display: flex;
-    flex-grow: .05;
+    flex-grow: 2;
     flex-direction: column;
     border-right: 1px solid rgb(229, 231, 235);
     background-color: rgb(250, 251, 251);
+    position: relative;
+}
+
+#head {
+    display: flex;
+    flex-direction: row;
+    align-content: space-between;
+}
+
+main section div h2 {
+    padding: .5rem 1rem;
+}
+
+main section div button {
+    margin-top: .75rem;
+    position: absolute;
+    right: 1rem;
+    padding: 0.5rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 0.5rem;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    width: 90px;
+    height: 40px;
+}
+
+main section div nav {
+    display: flex;
+    flex-direction: column;
+}
+
+#list a {
+    margin: .5rem 1rem .5rem 1rem;
+    padding: 1rem 1rem 1rem 1rem;
+    text-align: center;
+    color: black;
+    text-decoration: none;
+    font-weight: bold;
+    border: 1px solid #ccc;
+    border-radius: 0.5rem;
+    background-color: white;
+    cursor: pointer;
+}
+
+#websocket {
+    position: absolute;
+    bottom: 0;
+    margin: .5rem;
+    padding: .5rem;
+    border: .5px solid #ccc;
+    border-radius: 0.5rem;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 }
 
 #notes {
-    flex-grow: .95;
+    flex-grow: 8;
+    display: flex;
+    flex-direction: column;
+}
+
+#person {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 1rem;
+}
+
+#person img {
+    margin: 1rem 0 0 1rem;
+    border-radius: 50%;
+}
+
+#person h2 {
+    align-self: center;
 }
 
 #notes div #list {
@@ -57,9 +127,29 @@ main {
     flex-direction: column;
 }
 
+.notebox {
+    margin: .5rem 1rem .5rem 1rem;
+    padding: 1rem 1rem 1rem 1rem;
+    text-align: left;
+    color: black;
+    border: 1px solid #ccc;
+    border-radius: 0.5rem;
+    background-color: white;
+}
+
+.notebox h3 {
+    text-emphasis: bold;
+}
+
 footer {
+    display: flex;
     border-top: 1px solid rgb(229, 231, 235);
     text-align: center;
     align-items: center;
+    justify-content: center;
     background-color: rgb(250, 251, 251);
+}
+
+footer p {
+    margin: 1rem;
 }
