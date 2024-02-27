@@ -12,6 +12,10 @@ Created an AWS server instance. It is running nonstop. Should be free. I also go
 
 Today I got the domain name **mypeoplenotes.com**. I then attached it to my ip address. I did this through Route 53 on AWS. I purchased the domain then I went to my domain name and added records. I used the ip address and also made it so all subdomains will use the same ip address.
 
+![Alt text](image.png)
+!["Yeah"](image-1.png)
+![Alt text](image-2.png)
+
 
 ## NOTES
 
@@ -3440,3 +3444,1047 @@ while (true) {
 }
 // OUTPUT: 0 1
 ```
+
+
+# The Console
+
+📖 **Deeper dive reading**: [MDN Command line crash course](https://developer.mozilla.org/en-US/docs/Learn/Tools_and_testing/Understanding_client-side_tools/Command_line)
+
+Before the creation of graphical user interfaces, all computing systems were simple console environments consisting as of a prompt for inputting a command and the display of the command output. All of the original programming tools ran as console application. The console tradition is still actively used by professional developers and most programming tools execute within a console window.
+
+Also known as the command line, shell, or terminal, the console window is an essential web development tool. The console provides access to the file system and allows for the execution of command line applications.
+
+There are many console applications that you can chose from. All operating systems come with a default console, but you will probably want to install one in order to get the best experience. Here is an example of [Warp](https://www.warp.dev/) running on a Mac.
+
+![Warp](warp.png)
+
+## Make sure you have a console application
+
+In order for you to successfully use the console for web programming it must be [POSIX](https://en.wikipedia.org/wiki/POSIX) compliant. POSIX compliance means that it supports a standard set of console commands. Both Mac and Linix support POSIX. That means any necessary console commands will work on those operating systems.
+
+## Getting a console application for Windows
+
+If you are using Microsoft Windows you can get a reasonable approximation of a POSIX compliant console by installing [Git Bash](https://git-scm.com/download/win). When installing, use all the default settings.
+
+Once it is installed, hit the Windows button on your keyboard, and type `Git Bash`. This should open a console window that looks something like the following. Make sure you look for the `Git Bash` icon so that you don't accidentally use an non-POSIX compatible console application.
+
+![Git Bash](gitBash.jpg)
+
+⚠ Do not use `Git Command`, `cmd`, or `Powershell`. That will not work for the commands and scripts we run in this class.
+
+You can use Windows Subsystem for Linux (WSL) (e.g Ubuntu on Windows) for your work in this class, but you must be very careful to do all of your work actually within WSL. Don't download files to your Windows partition and then access them from WSL. It is suggested that you use `Git Bash` instead of WSL, unless you are really familiar with WSL.
+
+### Testing your console application
+
+Once you have a acceptable console application on your development computer, open it up and make sure you can run a simple POSIX compliant command such as `printf 'hello\n'`.
+
+![Console printf](consolePrintf.jpg)
+
+If this displays `hello` then you are on the right track. If that doesn't work then you are using a console application that is not POSIX compliant. For example, Windows Powershell will not work.
+
+## Viewing the file system
+
+One of the primary purposes of a console application is to view the files on the computer. The files on a computer are organized into a tree structure of nodes called directories. At any given point in time your console is located at one of the directories in the file system. You can see which directory you are in with the `pwd` (present working directory) command.
+
+```sh
+➜  pwd
+
+/Users/student/byu//webprogramming260
+```
+
+You can list all of the files in the directory with `ls` (list files). Most command line applications take parameters that are specified after you type the application name. For example, `ls` can list all files (even hidden ones) in a long format if you provide the parameter `-la`.
+
+```sh
+➜ ls -la
+
+total 16
+-rw-r--r--  1 lee  staff   1.0K Nov 19 08:47 LICENSE
+-rw-r--r--  1 lee  staff    82B Nov 19 08:47 README.md
+drwxr-xr-x  4 lee  staff   128B Nov 19 08:48 profile
+drwxr-xr-x  4 lee  staff   128B Nov 19 08:47 react
+```
+
+## Executing commands
+
+The other primary purpose of the console is to execute commands. You already did this in the previous section when you executed commands for working with the file system. However, console commands can perform many different operations. Here are some basic commands that you show experiment with.
+
+- **echo** - Output the parameters of the command
+- **cd** - Change directory
+- **mkdir** - Make directory
+- **rmdir** - Remove directory
+- **rm** - Remove file(s)
+- **mv** - Move file(s)
+- **cp** - Copy files
+- **ls** - List files
+- **curl** - Command line client URL browser
+- **grep** - Regular expression search
+- **find** - Find files
+- **top** - View running processes with CPU and memory usage
+- **df** - View disk statistics
+- **cat** - Output the contents of a file
+- **less** - Interactively output the contents of a file
+- **wc** - Count the words in a file
+- **ps** - View the currently running processes
+- **kill** - Kill a currently running process
+- **sudo** - Execute a command as a super user (admin)
+- **ssh** - Create a secure shell on a remote computer
+- **scp** - Securely copy files to a remote computer
+- **history** - Show the history of commands
+- **ping** - Check if a website is up
+- **tracert** - Trace the connections to a website
+- **dig** - Show the DNS information for a domain
+- **man** - Look up a command in the manual
+
+You can also chain the input and output of commands using special characters
+
+- `|` - Take the output from the command on the left and _pipe_, or pass, it to the command on the right
+- `>` - Redirect output to a file. Overwrites the file if it exists
+- `>>` - Redirect output to a file. Appends if the file exists
+
+For example, you can list the files in a directory, pipe it into `grep` to search for files created in Nov, and then pipe that into `wc` to count the number of files found with a date of Nov.
+
+```
+ls -l | grep ' Nov ' | wc -l
+```
+
+There are also keystrokes that have special meaning in the console.
+
+- `CTRL-R` - Use type ahead to find previous commands
+- `CTRL-C` - Kill the currently running command
+
+## ☑ Assignment
+
+Experiment with console commands. Open a console window and create a test directory that you can play with by executing the command `mkdir test` (make directory). Then execute the command `cd test` to change into that directory. Then execute the following sequence of commands:
+
+```sh
+mkdir test
+cd test
+pwd
+ls
+ls -la
+ls ../
+printf "x" > test.txt
+ls -l
+cat test.txt
+cp test.txt other.txt
+ls
+cat test.txt >> other.txt
+rm test.txt
+less other.txt # press `q` to exit less
+for i in {1..2}; do printf 'y' >> other.txt; done;
+```
+
+Once you have done this, go over to the assignments page in Canvas and submit the text that results from running `cat other.txt`.
+
+The better you get at working with the console the more efficient your programming will be.
+
+
+# Git
+
+![Git Icon](essentialsGitIcon.png)
+
+[Linus Torvalds](https://en.wikipedia.org/wiki/Linus_Torvalds), the creator of Linux, was fed up with the proprietary version control software that he was using to track the code for the Linux kernel and so over a weekend he built Git, the world's most popular version control system.
+
+![Linus Torvalds](linusTorvalds.jpg)
+
+> “Talk is cheap. Show me the code.”
+>
+> — Linus Torvalds
+
+## Installing Git
+
+Before we can talk about Git you need to make sure it is installed in your development environment. Open a console and type `git --version`.
+
+```sh
+➜  git --version
+git version 2.32.0 (Apple Git-132)
+```
+
+If you do not see something like that, then you need to follow these [instructions](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) to install Git.
+
+## What is Git?
+
+Git provides two valuable functions. First, it allows you to track versions of files in a directory. Second, it allows you to clone all of those versions to a different location, usually to a different computer. We are going to focus on tracking versions in this instruction and cover cloning repositories when we talk later about GitHub.
+
+You can track file versions of any files in a directory by initializing Git for that directory. You can do this right now by creating a new directory in a console window and initializing it as a Git repository.
+
+```sh
+➜  mkdir playingWithGit
+➜  cd playingWithGit
+➜  git init
+```
+
+If you list all files in the directory you will see that you now have a hidden directory named `.git`.
+
+```sh
+➜  ls -la
+total 0
+drwxr-xr-x   3 lee  staff    96 Dec  1 22:59 .
+drwxr-xr-x+ 54 lee  staff  1728 Dec  1 23:00 ..
+drwxr-xr-x   9 lee  staff   288 Dec  1 22:59 .git
+```
+
+The `.git` directory is where all of the versions get stored. Now use the `echo` command to create a file so that we can see how versioning works. After creating the new file, use `git status` to tell you what git is doing.
+
+```sh
+➜ echo hello world > hello.txt
+➜ git status
+
+On branch master
+No commits yet
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+ hello.txt
+
+nothing added to commit but untracked files present (use "git add" to track)
+```
+
+`git status` tells you that it detects a new file named `hello.txt`, but it isn't currently tracking versions for that file. To begin tracking versions you need to add it. Usually you track all files in a repository directory and so you can tell Git to track everything that it doesn't know about with `git add .`. Make sure you include the period at the end of the command. Follow the add command with another call to `git status` in order to see what the repo looks like now.
+
+```sh
+➜  git add .
+➜  git status
+
+On branch master
+No commits yet
+Changes to be committed:
+  (use "git rm --cached <file>..." to unstage)
+ new file:   hello.txt
+```
+
+Now Git tells us that it has _staged_ the file `hello.txt`, meaning it is ready to be committed as a version in the repository. We commit a version with the `commit` command. We always want to have a meaningful comment about the version we are committing and so we use the `-m` parameter to provide a message that will live with the version. Follow this with another call to `git status`.
+
+```sh
+➜  git commit -m "initial draft"
+[master (root-commit) d43b07b] initial draft
+ 1 file changed, 1 insertion(+)
+ create mode 100644 hello.txt
+
+➜  git status
+On branch master
+nothing to commit, working tree clean
+```
+
+Congratulations! You have just committed your first file to a Git repository. It is important to note that we were only working with a single file in this example. However, a commit can represent multiple files. You just need to add them all before you execute the commit. Also, note that the point of the stage, `git add` step, is so that you can commit some files while still leaving other modified files out of the commit. Only files you've staged will be committed.
+
+Let's make an edit to our file and commit it again. This time we will tell Git that we want to add all the modified tracked files to our commit, without having to `git add` them again, by including the `-a` parameter along with our message parameter.
+
+```sh
+➜  echo goodbye world > hello.txt
+
+➜  git commit -am "changed greeting to reflect the present mood"
+
+[master e65f983] changed greeting to reflect the present mood
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+```
+
+Now that we have a couple versions in our repository we can view the versions with the `git log` command.
+
+```sh
+➜  git log
+
+commit e65f9833ca8ee366d0d9c1676a91b1a977dab441 (HEAD -> master)
+Author: Lee
+Date:   Thu Dec 1 23:32:22 2022 -0700
+
+    changed greeting to reflect the present mood
+
+commit d43b07b8890f52defb31507211ba78785bf6dccf
+Author: Lee
+Date:   Thu Dec 1 23:29:11 2022 -0700
+
+    initial draft
+```
+
+This shows both commits with the associated comments.
+
+## Commit SHA
+
+Every commit has a unique identifier that is generated by hashing the file along with the timestamp using the SHA hashing algorithm. You can always refer to a specific commit in your version history by using its SHA. For example, if we want to temporarily switch back to a previous version to see what it contains we can use the `checkout` command. You only need to provide the first few characters of the SHA.
+
+```sh
+➜  git checkout d43b07b8890f
+
+Note: switching to 'd43b07b8890f'.
+HEAD is now at d43b07b initial draft
+
+➜  cat hello.txt
+hello world
+```
+
+The above output omits a big message saying that you are no longer looking at the latest version, but the important thing is that you can see that we are now looking at our old version. Note that you don't want to make commits at this point since it will create a branch that is not for the latest code. To get back to the top of the version chain, use the `checkout` command and reference the branch name, which is by default `master`.
+
+```sh
+➜  git checkout master
+Previous HEAD position was d43b07b initial draft
+Switched to branch 'master'
+
+➜  cat hello.txt
+goodbye world
+```
+
+Now we are back to our latest version.
+
+The following diagram shows how your commits move from your working directory, to staging them for a commit, and then committing them to a repository.
+
+![Git stage](essentialsGitStage.jpg)
+
+A commit is a full snapshot of what was staged from your directory at the time of the commit. That means all of the files contained in the commit were reverted when you executed the checkout command. Since we only had one file in our commit, it looks like we are only flipping that file around, but basically you can think of it as a time machine for the entire directory.
+
+## Diff
+
+Most of the time you don't want to reverse back to an earlier commit. Instead you just want to compare the differences between commits. We can do that with the `diff` command. You can specify two SHAs that you would like to compare, or you can use the `HEAD` variable, which always points to the commit you're currently looking at. To refer to earlier commits you just add `~` and the numerical distance from `HEAD` that you want to reference. In this case we will compare `HEAD` and `HEAD~1`.
+
+```sh
+➜  git diff HEAD HEAD~1
+```
+
+```diff
+diff --git a/hello.txt b/hello.txt
+index 3b18e51..eeee2af 100644
+--- a/hello.txt
++++ b/hello.txt
+@@ -1 +1 @@
+-hello world
++goodbye world
+```
+
+You can see that we made a change to `hello.txt` by removing `hello world` and adding `goodbye world`.
+
+## Branches
+
+Git supports the ability to branch your code. This allows you to work on variations of the code while still allowing progress on the main branch. For example, if you wanted to work on a new feature named `A` without interrupting work on the master branch, you would use the `git branch A` command to create a new branch named `A`, then start working on the new branch with the `git checkout A` command. Now commits can be done to either the `master` branch or the `A` branch. When you want to combine the work done on both branches, you checkout the `master` branch and execute `git merge A`. If you decide you want to abandon the new feature, then you just don't ever merge it back into the master branch.
+
+Here is a demonstration of this working on the visualization tool provided by [git-school.github.io](https://git-school.github.io/visualizing-git/).
+
+![Branches](essentialsBranching.gif)
+
+## Commit often
+
+You will be required to have at least ten commits for each project that you submit in order to get full credit. Commonly, this will be an initial commit that contains empty project files, followed by commits at each functional milestone, and then a final commit for the working project. Committing your code often is an important practice for you to develop. It protects you from losing your work, allows access from anywhere, makes it so you can quickly share changes, reduces conflicts with your peers, and enables you to efficiently explore different possibilities. This also enables others to review the progression of your development efforts in order to prove the originality of your work.
+
+Remember to make meaningful commit messages that describe the **what** and **why** of the changes made. Here is a [good post](https://www.freecodecamp.org/news/how-to-write-better-git-commit-messages/) on how to make meaningful commit messages.
+
+## Binary files
+
+You can store any type of file in Git, but be aware that if you store large binary files, such as images or videos, you are storing a copy of that file each time you make a change to it. For example, suppose you use Git to track the changes you make to a video production project. Every time you save a change to your 10 GB video file you store a complete copy of the file. That means 10 commits of the video file will store 100 GB of data in your repository.
+
+## VS Code and Git
+
+Knowing how to use Git from the console is a very valuable skill. Git offers a wide variety of functionality such as creating branches of the repository, temporarily stashing changes, and cloning repositories to other machines.
+
+However, by using a tool like VS Code you can hide all of the complexity of the command line and use a visual interface instead.
+
+Here we see VS Code, with the GitLens extension installed, looking at the directory we have been working in. On the left you see all the commits we have previously created. We can edit our `hello.txt` file and VS Code will automatically detect the change and set it up for us to commit. VS Code will even put a marking on the left side of the edited text to show us what line we have changed. We can click on the staged file, in the commit area, and see the differences before we commit. Since they look good, we add a comment, and press commit. The new commit immediately shows up in our list of commits. We can use the visual diff again to click through all of the previous versions.
+
+![VS Code Git](essentialsVSCodeGit.gif)
+
+Underneath the covers, the GitLens extension is running Git commands just like we did on the command line, but using a visual tool makes working with versions much easier. Take some time and play with adding files, modifying them, committing, and diffing. You want to get to the point where this is second nature so that you can easily experiment and make mistakes, knowing that with Git, you can always easily recover.
+
+
+# A brief history of web programming
+
+Having a basic knowledge of the history of web programming helps you to understand why we have the assortment of technologies that you will be working with. There has been three distinct phases that make up this history.
+
+1. The formation of the internet that supports the communication of web applications
+1. The creation of HTML and HTTP that made it possible to shared hyperlinked documents (Web 1.0).
+1. The creation of CSS and JavaScript that enabled interactive web applications (Web 2.0).
+
+## The Internet
+
+The essential first step to enabling what we now call web programming was the formation of a global communications network that was reliable and publicly available. This was made possible when the United States Department of Defense created the ARPANET as a means of sharing information between universities doing defense related research.
+
+![Arpanet](arpanet1970s.jpg)
+
+— ARPANET access points in the 1970s (**Source**: _Wikipedia_)
+
+ARPANET was defined with the goal of withstanding a nuclear attack. This led to the implementation of a redundantly connected graph of computing devices. Within that network, two computers communicate by dynamically discovering a path to each other without the help of a single central authority.
+
+In the 1980s, the National Science Foundation continued the expansion of the network, and commercial enterprises began to make significant contributions. This eventually led to the Internet as we know it today, as the world went online as part of a massive explosion of consumer participation in the early 1990s. This was followed by another exponential increase in the 2000s as smart phones and appliances became common.
+
+The management of the Internet is controlled by two major organizations. The Internet Engineering Task Force (IETF) defines the technical standards that specify how the physical network communicates. The Internet Corporation for Assigned Names and Numbers (ICANN) oversees both the Internet Protocol ([IP](https://en.wikipedia.org/wiki/Internet_Protocol)) address space, and the Domain Name System ([DNS](https://en.wikipedia.org/wiki/Domain_Name_System)). These two databases form the address book of the Internet. When the United States government transitioned control of these governing bodies to a global community of non-profit stake holders in 2016, the Internet became a worldwide asset free from any specific political control.
+
+## Hypertext Markup Language (HTML)
+
+![Tim Berners Lee](timBernersLee.jpg)
+
+> “I just had to take the hypertext idea and connect it to the TCP and DNS ideas and—ta-da!—the World Wide Web.”
+>
+> — Tim Berners-Lee, (**Source**: _Answers for Young People_)
+
+Starting in 1980, Tim Berners-Lee was working at the research laboratory Cern. He was tasked with building a system that would allow researchers to share documents between remote academic institutions. Realizing that the ARPANET provided the necessary connectivity, he defined the protocols for document sharing that formed the underpinning of what would be termed the World Wide Web. Berners-Lee named the document format the HyperText Markup Language ([HTML](https://en.wikipedia.org/wiki/HTML)) based on inspiration from the digital publishing industry's Standard Generalized Markup Language (SGML). One of the key innovations of HTML was the idea that documents could be interconnected with what he termed hyperlinks to allow immediate access to related documents. In 1990 he put all the pieces together and built the world's first web server on his desktop NeXT computer. You can visit a reproduction of the first web site at [info.cern.ch](http://info.cern.ch/).
+
+![First web server](firstWebServer.jpg)
+
+— First web server (**Source**: _Cern_)
+
+Originally, HTML contained only 18 elements, or tags. The latest version of HTML has now grown to over 100. The initial explosion of elements was caused in part by browser vendors racing to create differentiating functionality in order to gain market share. Since 1996 the HTML specification has been controlled by the [W3C](https://www.w3.org/). The following is an example of a simple HTML document.
+
+```html
+<html>
+  <body>
+    <p>Hello world!</p>
+  </body>
+</html>
+```
+
+## HTTP and URL
+
+While HTML was an incredible step forward, Berners-Lee also made other significant contributions. This included the definition of the HyperText Transfer Protocol ([HTTP](https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol)) and the Uniform Resource Locator ([URL](https://en.wikipedia.org/wiki/URL)). These two definitions specify how web documents are addressed and transmitted across the Internet. The following gives an example of a URL and HTTP request.
+
+```http
+http://info.cern.ch/hypertext/WWW/Helping.html
+```
+
+```http
+GET /hypertext/WWW/Helping.html HTTP/1.1
+Host: info.cern.ch
+Accept: text/html
+```
+
+## Cascading Style Sheets (CSS)
+
+Cascading Style Sheets ([CSS](https://en.wikipedia.org/wiki/CSS)) was first proposed in 1994 by Håkon Wium Lie, a contemporary of Berners-Lee at CERN, in order to give HTML documents visual styling independent of the content's structure. Before the introduction of CSS, HTML was going down the path of hard coding the visual appearance of the content with HTML elements. This would have resulted in a single visual style for the entire web that was completely defined by the browser vendors.
+
+![Hakon Lie](hakonLie.jpg)
+
+> “If we hadn’t developed CSS, we could have ended up with the web being a giant fax machine”
+>
+> — Håkon Wium Lie (**Source**: _Medium.com_)
+
+By 1996, CSS became a standard and all the major browsers began to implement the functionality. Unfortunately, for the first years of CSS the same proprietary wars that plagued HTML also affected CSS. Much of the work on version 2.1 was to remove error and make all the features of CSS compatible. Here is a simple example of CSS that defines the white spacing, color, and shadowing of paragraph text.
+
+```css
+p {
+  margin: 0;
+  padding: 20px 0;
+  color: #00539f;
+  text-shadow: 3px 3px 1px black;
+}
+```
+
+The ability of CSS to style a web page has increased significantly from its original implementation. With modern CSS a web programmer can import fonts, animate HTML elements, respond to user actions, and dynamically alter the entire layout of the page based on the size of a device and its orientation.
+
+## JavaScript
+
+In 1995 Netscape (the maker of the popular browser Navigator) decided to add the ability to script web pages. The initial implementation was led by Brendan Eich and given the name JavaScript. JavaScript turned the previously static web into an interactive experience where a web page could dynamically change based upon a user's interaction.
+
+![Brendan Eich](brendanEich.jpg)
+
+> “Always bet on JS”
+>
+> — Brendan Eich (**Source**: _brendaneich.github.io_)
+
+In 1996 Netscape turned control of JavaScript over to ECMA International in an attempt to standardize the definition of the language. At that point JavaScript officially became know as ECMAScript, although it is still commonly referred to as JavaScript.
+
+Here is an example of a simple JavaScript program that combines variables and prints out the result.
+
+```js
+const join = (...a) => {
+  return a.reduce((accumulator, currentValue) => accumulator + currentValue);
+};
+
+console.log(join(1, 2));
+console.log(join('hello', ' ', 'world', '!'));
+```
+
+The first decade of JavaScript was turbulent as each of the major browser vendors attempted to introduce new proprietary features in order to gain market share. Eventually in 2009 the major vendors agreed on the ECMAScript 5 standard and in 2015 ECMAScript 6 was released as the last major feature upgrade. Since then minor releases have taken the year of their release as their version number.
+
+### JavaScript outside the browser
+
+In 2009 Ryan Dahl created Node.js as the first successful application for deploying JavaScript outside of a browser. This changed the mindset of JavaScript as purely a browser technology to one that is leveraged across an entire technology stack.
+
+Other important milestones in the history of JavaScript include the 2013 standardization of the common object notation JSON, a typed variant named TypeScript in 2012, and the introduction of numerous transpilers for converting other languages into compatible ECMAScript.
+
+## What's next?
+
+Looking forward, there are many exciting opportunities, as well as problems to solve. This includes addressing topics like application complexity, device diversity, internationalization, security, privacy, data ownership, environmental impact, global authorization identity, performance, and accessibility.
+
+The only thing certain is that you have an opportunity to be a big part of it. One important lesson you can learn from these early pioneers, is that with web programming, a single person can change the world. I hope to see your face on this history page one day.
+
+
+# Domain names
+
+📖 **Deeper dive reading**: [MDN What is a Domain Name](https://developer.mozilla.org/en-US/docs/Learn/Common_questions/What_is_a_domain_name)
+
+In the instruction about the internet we showed how an IP address can be referenced by a domain name. You can get the IP address for any domain using the `dig` console utility. Notice that in the following example there are actually multiple IP addresses associated with the domain name `amazon.com`. This allows for redundancy in case one of the IP addresses fails to successfully resolve to a valid connection because the server listening at that IP address is not responding.
+
+```sh
+➜  dig amazon.com
+
+amazon.com.		126	IN	A	205.251.242.103
+amazon.com.		126	IN	A	52.94.236.248
+amazon.com.		126	IN	A	54.239.28.85
+```
+
+A domain name is simply a text string that follows a specific naming convention and is listed in a special database called the domain name registry.
+
+Domain names are broken up into a root domain, with one or more possible subdomain prefixes. The root domain is represented by a secondary level domain and a top level domain. The top level domain (TLD) represent things like `com`, `edu`, or `click`. So a root domain would look something like `byu.edu`, `google.com`, or `cs260.click`. The [possible list of TLDs](https://www.icann.org/resources/pages/tlds-2012-02-25-en) is controlled by ICANN, one of the governing boards of the internet.
+
+![Domain name parts](domainNameParts.jpg)
+
+The owner of a root domain can create any number of subdomains off the root domain. Each subdomain may resolve to a different IP address. So the owner of `cs260.click` can have subdomains for travel (`travel.cs260.click`), finance (`finance.cs260.click`), or a blog (`blog.cs260.click`).
+
+You can get information about a domain name from the domain name registry using the `whois` console utility.
+
+```yaml
+➜  whois byu.edu
+
+Domain Name: BYU.EDU
+
+Registrant:
+	Brigham Young University
+	3009 ITB
+	2027 ITB
+	Provo, UT 84602
+	USA
+
+Administrative Contact:
+	Mark Longhurst
+	Brigham Young University
+	Office of Information Technology
+	1208 ITB
+	Provo, UT 84602
+	USA
+	+1.8014220488
+	markl@byu.edu
+
+Technical Contact:
+	Brent Goodman
+	Brigham Young University
+	Office of Information Technology
+	1203J ITB
+	Provo, UT 84602
+	USA
+	+1.8014227782
+	dnsmaster@byu.edu
+
+Domain record activated:    19-Jan-1987
+Domain record last updated: 11-Jul-2022
+Domain expires:             31-Jul-2025
+```
+
+This provides information such as a technical contact to talk to if there is a problem with the domain, and an administrative contact to talk to if you want to buy the domain. Maybe we should talk to Mark and see if he is willing to sell.
+
+## DNS
+
+Once a domain name is in the registry it can be listed with a domain name system (DNS) server and associated with an IP address. Of course you must also lease the IP address before you can use it to uniquely identify a device on the internet, but that is a topic for another time. Every DNS server in the world references a few special DNS servers that are considered the `authoritative name servers` for associating a domain name with an IP address.
+
+The DNS database records that facilitate the mapping of domain names to IP addresses come in several flavors. The main ones we are concerned with are the `address` (`A`) and the `canonical name` (`CNAME`) records. An `A` record is a straight mapping from a domain name to IP address. A `CNAME` record maps one domain name to another domain name. This acts as a domain name alias. You would use a CNAME to do things like map `byu.com` to the same IP address as `byu.edu` so that either one could be used.
+
+When you enter a domain name into a browser, the browser first checks to see if it has the name already in its cache of names. If it does not, it contacts a DNS server and gets the IP address. The DNS server also keeps a cache of names. If the domain name is not in the cache, it will request the name from an `authoritative name server`. If the authority does not know the name then you get an unknown domain name error. If the process does resolve, then the browser makes the HTTP connection to the associated IP address.
+
+As you can see, there is a lot of levels of name caching. This is done for performance reasons, but it also can be frustrating when you are trying to update the information associated with your domain name. This is where the `time to live` (`TTL`) setting for a domain record comes into play. You can set this to be something short like 5 minutes or as long as several days. The different caching layers should then honor the TTL and clear their cache after the requested period has passed.
+
+## Leasing a domain name
+
+You can pay to lease an unused domain name for a specific period of time. Before the lease expires, you have the right to extend the lease for an additional amount of time. The cost to buy the domain varies from something like $3 to $200 a year. Buying, or sub-leasing, an existing domain name from a private party can be very expensive, and so you are better off buying something obscure like `idigfor.gold` (currently available for only $101). This is one reason why companies have such strange names these days.
+
+Refer to the instruction on using [Route 53](../amazonWebServicesRoute53/amazonWebServicesRoute53.md) if you are interested in leasing a domain name.
+
+# Caddy
+
+![Caddy](caddyLogo.png)
+
+Caddy is a web service that listens for incoming HTTP requests. Caddy then either serves up the requested static files or routes the request to another web service. This ability to route requests is called a `gateway`, or `reverse proxy`, and allows you to expose multiple web services (i.e. your project services) as a single external web service (i.e. Caddy).
+
+For this course, we use Caddy for the following reasons.
+
+- Caddy handles all of the creation and rotation of web certificates. This allows us to easily support HTTPS.
+- Caddy serves up all of your static HTML, CSS, and JavaScript files. All of your early application work will be hosted as static files.
+- Caddy acts as a gateway for subdomain requests to your Simon and startup application services. For example, when a request is made to `simon.yourdomain` Caddy will proxy the request to the Simon application running with node.js as an internal web service.
+
+![Caddy](webServersCaddy.jpg)
+
+Caddy is preinstalled and configured on your server and so you do not need to do anything specifically with it other than configure your root domain name.
+
+## Important Caddy files
+
+As part of the installation of Caddy we created two links in the Ubuntu user's home directory that point to the key Caddy configuration files. There links were created in the home directory so that you do not have to hunt around your server looking for these files.
+
+- **Configuration file**: `~/Caddyfile`
+
+  Contains the definitions for routing HTTP requests that Caddy receives. This is used to determine the location where static HTML files are loaded from, and also to proxy requests into the services you will create later. Except for when you configure the domain name of your server, you should never have to modify this file manually. However, it is good to know how it works in case things go wrong. You can read about this in the [Caddy Server documentation](https://caddyserver.com/docs/caddyfile).
+
+- **HTML files**: `~/public_html`
+
+  This is the directory of files that Caddy serves up when requests are made to the root or your web server. This is configured in the Caddyfile discussed above. If you actually look at the Caddyfile you will see that the static file server is mapped to `/usr/share/caddy`. That is the location that the file link in the Ubuntu user's home directory, `~/public_html`, is pointing to.
+
+  ```
+  :80 {
+        root * /usr/share/caddy
+        file_server
+  }
+  ```
+
+  Therefore, according to this configuration, whenever Caddy receives an HTTP request for any domain name on port 80 it will use the path of the request to find a corresponding file in this directory. For example, a request for `http://yourdomainname/index.html` will look for a file named `index.html` in the `public_html` directory.
+
+
+  # HTTPS, TLS, and web certificates
+
+To this point you have been accessing your web server using HTTP. If you notice your browser has been yelling at you that your connection is `⚠ Not Secure` from the location bar.
+
+![Non-secure website](../amazonWebServicesRoute53/webServerWithHostname.png)
+
+During the first couple decades of the web, it was pretty common for websites to simply use HTTP (non-secure hypertext transport protocol) since it was difficult, non-performant, and expensive to secure the connection. Additionally, most websites just provided access to documents and so it didn't need to protect user's information. Usually, only websites that were doing commerce needed a secure connection. That all changed when computers got faster and the web moved from simple document servers (Web 1.0) to full on web applications (Web 2.0) that accepted information from users and displayed that information within the application. Without a secure connection anyone that had access to the network traffic, at any point, from the user's computer to the server handling the request could easily capture all the data sent in either direction. Remember when we used the console program `traceroute` to show you how many computers your connection goes through. You definitely do not want those computers to have access to your user's sensitive information.
+
+## HTTPS and TLS
+
+The secure version of HTTP is called Secure Hypertext Transport Protocol (`HTTPS`). This is basically HTTP with a negotiated secure connection that happens before any data is exchanged. Having a secure connection means that all the data is encrypted using the [TLS protocol](https://developer.mozilla.org/en-US/docs/Web/Security/Transport_Layer_Security). TLS is sometimes referred to by a now unsecure predecessor protocol named SSL. TLS works by negotiating a shared secret that is then used to encrypt data. You can see the actual negotiation that happens by using the console browser based application `curl`, along with the `-v` parameter to see the verbose output of the HTTPS exchange. The `> /dev/null` redirection throws away the actual HTTP response, since we only care about the negotiation, by redirecting the output to the null device.
+
+```sh
+➜  curl -v -s https://byu.edu > /dev/null
+
+*   Trying 128.187.16.184:443...
+* Connected to byu.edu (128.187.16.184) port 443 (#0)
+* ALPN: offers h2
+* ALPN: offers http/1.1
+*  CAfile: /etc/ssl/cert.pem
+*  CApath: none
+* (304) (OUT), TLS handshake, Client hello (1):
+} [312 bytes data]
+* (304) (IN), TLS handshake, Server hello (2):
+{ [122 bytes data]
+* (304) (IN), TLS handshake, Unknown (8):
+{ [25 bytes data]
+* (304) (IN), TLS handshake, Certificate (11):
+{ [3211 bytes data]
+* (304) (IN), TLS handshake, CERT verify (15):
+{ [520 bytes data]
+* (304) (IN), TLS handshake, Finished (20):
+{ [52 bytes data]
+* (304) (OUT), TLS handshake, Finished (20):
+} [52 bytes data]
+* SSL connection using TLSv1.3 / AEAD-AES256-GCM-SHA384
+* ALPN: server accepted http/1.1
+* Server certificate:
+*  subject: C=US; ST=Utah; L=Provo; O=Brigham Young University; CN=*.byu.edu
+*  start date: Jan 24 00:00:00 2022 GMT
+*  expire date: Jan 24 23:59:59 2023 GMT
+*  subjectAltName: host "byu.edu" matched cert's "byu.edu"
+*  issuer: C=US; O=DigiCert Inc; CN=DigiCert TLS RSA SHA256 2020 CA1
+*  SSL certificate verify ok.
+```
+
+You can see that the negotiation is fairly complex as it involves multiple steps in the handshake. A core piece of the handshake is the exchange of a web certificate that identifies the domain name of the server creating the secure connection. The browser will compare the certificate domain name to the one represented in the URL and if they don't match, or the certificate is invalid or out of date, it will display a massive warning.
+
+In the example above we asked for `byu.edu` and got a valid certificate for byu.edu and so everything looks great.
+
+## Web certificates
+
+Web certificates are generated by a trusted 3rd party using public/private key encryption. The certificate issuer is responsible for verifying that the certificate owner actually owns the domain name represented by the certificate. Once you have a certificate for your domain name, you can serve the certificate from your web server and then the browser can validate the certificate by using the public keys of the certificate issuer.
+
+Until about 2014 it would cost you hundreds of dollars a year to get a web certificate, and you needed a certificate for every domain and subdomain that you owned. That would cost, even a small company, thousands of dollars a year because the certificates needed to be renewed in order to ensure that it still represented the owner of the domain name and to limit the impact of a stolen certificate.
+
+That all changed when two Mozilla employees created a non-profit called `Let's Encrypt` with the goal of creating trusted web certificates for free. This effectively broke the monopoly that the trusted web certificate issuers had on the industry.
+
+Now using a service like `Let's Encrypt`, and the IETF standard [ACME protocol](https://en.wikipedia.org/wiki/Automatic_Certificate_Management_Environment) that they pioneered, anyone who owns a domain name, can dynamically generate and renew a certificate for free. This incredible contribution of critical web technology has made the web safer, and more reliable, for everyone.
+
+Caddy uses Let's Encrypt to generate a web certificate every time an HTTPS request is made for a domain name that Caddy doesn't have a web certificate for. When this happens Caddy asks Let's Encrypt to verify that the domain for the requested certificate is actually owned by the requester. Let's Encrypt does that by telling the requester to return a specific digitally signed response for a temporary URL when an HTTP request to the domain is made. Let's Encrypt then makes the HTTP request, and if successful, issues the certificate to the requester.
+
+![Let's Encrypt cert generation](letsencryptCertIssue.jpg)
+
+If you are interested, you can learn about how the Let's Encrypt generates certificate from their [documentation](https://letsencrypt.org/how-it-works/).
+
+## Enabling HTTPS
+
+Modern browsers now expect web servers to exclusively use HTTPS for all communication. In fact, the next version of HTTP (v3) only supports secure connections. For this reason, you should always support HTTPS for any web application that you build.
+
+You can obtain, and renew, a web certificate by enabling the ACME protocol for your web server and communicating with Let's Encrypt to generate the needed certificates. This is not difficult to do, and many languages such as Rust, Node.js, or Go support this functionality by simply including an additional library.
+
+### Caddy
+
+For our work we are using the web service Caddy to act as a gateway to our different services and to host our static web application files. Caddy has ACME support built into it by default, and so all you need to do is configure Caddy with the domain name for your web server. Here are the steps to take.
+
+⚠ Note that this is one of the few modification that you will manually make to your web server. Most other production changes are completed with automated continuous integration processes.
+
+1. Open a console window.
+1. Use the `ssh` console program to shell into your production environment server.
+
+   ```sh
+   ➜  ssh -i [key pair file] ubuntu@[yourdomainnamehere]
+   ```
+
+   for example,
+
+   ```sh
+   ➜  ssh -i ~/keys/production.pem ubuntu@myfunkychickens.click
+   ```
+
+1. Edit Caddy's configuration (`Caddyfile`) file found in the ubuntu user's home directory.
+
+   ```sh
+   ➜  cd ~
+   ➜  vi Caddyfile
+   ```
+
+1. Modify the Caddy rule for handling requests to port 80 (HTTP), to instead handle request for your domain name. By not specifying a port the rule will serve up files using port 443 (HTTPS), and any request to port 80 will automatically redirect the browser to port 443. Replace `:80` with your domain name (e.g. `myfunkychickens.click`). Make sure that you delete the colon.
+
+1. Modify the Caddy rules that route the traffic for the two web applications that we will build. To do this replace the two places where `yourdomain` appears with your domain name (e.g. `myfunkychickens.click`).
+
+1. Review the Caddyfile to make sure it looks right. If your domain name was `myfunkychickens.click` it would look like the following.
+
+   ```sh
+   myfunkychickens.click {
+      root * /usr/share/caddy
+      file_server
+      header Cache-Control no-store
+      header -etag
+      header -server
+   }
+
+
+   startup.myfunkychickens.click {
+      reverse_proxy * localhost:4000
+      header Cache-Control no-store
+      header -server
+      header -etag
+      header Access-Control-Allow-Origin *
+   }
+
+   simon.myfunkychickens.click {
+      reverse_proxy * localhost:3000
+      header Cache-Control no-store
+      header -server
+      header -etag
+      header Access-Control-Allow-Origin *
+   }
+   ```
+
+1. Save the file and exit VI (`:wq`)
+
+1. Restart Caddy so that your changes take effect. Note that this requires you to use `sudo` (super user do) to elevate your user to have the rights to restart the gateway.
+
+   ```sh
+   sudo service caddy restart
+   ```
+
+If you open your browser and navigate to your domain name you will now see that the browser is displaying a lock icon, using HTTPS, and your certificate has been automatically requested by Caddy and issued by Let's Encrypt.
+
+![Browser with HTTPS](webServerBrowserSecure.png)
+
+## ☑ Assignment
+
+If you have not already leased a domain name then go back and review that instruction.
+
+Secure your web server communication by configuring Caddy to request a certificate from Let's Encrypt for you domain name.
+
+Submit a URL for web server's hostname to the Canvas assignment.
+
+Don't forget to update your GitHub startup repository notes.md with all of the things you learned and want to remember.
+
+## Common problems
+
+| Symptom                                                           | Reason                                                                                                                                                                                      |
+| ----------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| The browser doesn't display by website                            | Check that the browser hasn't inserted a `www` subdomain prefix. Some browsers will hide this. You must actually click on the domain name in the address bar to see what it is really using |
+| My root domain works, but not the `simon` or `startup` subdomains | Your Caddy file is not configured properly. Check for typos. Also make sure you removed the `:` from the start of the Caddy rule.                                                           |
+| My `simon` or `start` up subdomains work, but not my root domain  | Your Caddy file is not configured properly. Check for typos.                                                                                                                                |
+
+
+# The internet
+
+📖 **Deeper dive reading**:
+
+- [MDN How does the Internet work?](https://developer.mozilla.org/en-US/docs/Learn/Common_questions/How_does_the_Internet_work)
+- [YouTube The Internet in 5 Minutes](https://youtu.be/7_LPdttKXPc)
+
+The internet globally connects independent networks and computing devices. In a simplistic way, you can think of the internet as a massive redundant collection of wires that connect up all the computers in the world. A lot of those wires are wireless (wiFi, satellite, or cell), and not all of computers in the world are connected, but generally that is what the internet is. The deeper your mental model of the internet is, the more effectively you will be able to create web applications.
+
+![Internet connections](internetConnections.jpg)
+
+## Making connections
+
+When one device wants to talk to another it must have an IP address. For example, `128.187.16.184` is BYU's address. Usually, human users prefer a symbolic name over an IP address. The symbolic name is called a domain name. Domain names are converted to IP address by doing a lookup in the Domain Name System (DNS). You can look up the IP address for any domain name using the `dig` console utility.
+
+```sh
+➜  dig byu.edu
+
+byu.edu.		5755	IN	A	128.187.16.184
+```
+
+![Internet requests](internetRequests.jpg)
+
+Once you have the IP address, you connect to the device it represents by first asking for a connection route to the device. A connection route consists of many hops across the network until the destination is dynamically discovered and the connection established. With the connection the transport and application layers start exchanging data.
+
+### Traceroute
+
+You can determine the hops in a connection using the `traceroute` console utility. In the following example, we trace the route between a home computer and BYU. In the result you see the first address `192.168.1.1`. This is the address of the network router the home computer is connected to. From there it goes through a couple devices that do not identify themselves and then hits the Google Fiber gateway. Google Fiber is the internet service provider, or ISP, for the requesting device. Then we jump through a few more unidentified devices before finally arriving at BYU (`128.187.16.184`).
+
+```sh
+➜  traceroute byu.edu
+
+traceroute to byu.edu (128.187.16.184), 64 hops max, 52 byte packets
+ 1  192.168.1.1 (192.168.1.1)  10.942 ms  4.055 ms  4.694 ms
+ 2  * * *
+ 3  * * *
+ 4  192-119-18-212.mci.googlefiber.net (192.119.18.212)  5.369 ms  5.576 ms  6.456 ms
+ 5  216.21.171.197 (216.21.171.197)  6.283 ms  6.767 ms  5.532 ms
+ 6  * * *
+ 7  * * *
+ 8  * * *
+ 9  byu.com (128.187.16.184)  7.544 ms !X *  40.231 ms !X
+
+```
+
+If I run traceroute again I might see a slightly different route since every connection through the internet is dynamically calculated. The ability to discover a route makes the internet resilient when network devices fail or disappear from the network.
+
+## Network internals
+
+The actual sending of data across the internet uses the TCP/IP model. This is a layered architecture that covers everything from the physical wires to the data that a web application sends. At the top of the TCP/IP protocol is the application layer. It represents user functionality, such as the web (HTTP), mail (SMTP), files (FTP), remote shell (SSH), and chat (IRC). Underneath that is the transport layer which breaks the application layer's information into small chunks and sends the data. The actual connection is made using the internet layer. This finds the device you want to talk to and keeps the connection alive. Finally, at the bottom of the model is the link layer which deals with the physical connections and hardware.
+
+### [TCP/IP](https://en.wikipedia.org/wiki/Internet_protocol_suite) layers
+
+| Layer       | Example         | Purpose                               |
+| ----------- | --------------- | ------------------------------------- |
+| Application | HTTPS           | Functionality like web browsing       |
+| Transport   | TCP             | Moving connection information packets |
+| Internet    | IP              | Establishing connections              |
+| Link        | Fiber, hardware | Physical connections                  |
+
+
+# Simon HTML
+```<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <!-- Tell browsers not to scale the viewport automatically -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Simon HTML</title>
+    <link rel="icon" href="favicon.ico" />
+  </head>
+  <body>
+    <!-- Use header, main, and footer elements to give semantic structure -->
+    <header>
+      <h1>Simon<sup>&reg;</sup></h1>
+
+      <!-- Navigation elements -->
+      <nav>
+        <!-- Menu is a semantic alternative to <ul> that represents an interaction -->
+        <menu>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="play.html">Play</a></li>
+          <li><a href="scores.html">Scores</a></li>
+          <li><a href="about.html">About</a></li>
+        </menu>
+      </nav>
+
+      <!-- Since we don't have the ability to style we use old style HTML to give some visual formatting -->
+      <hr />
+    </header>
+
+    <main>
+      <h1>Welcome</h1>
+      <p>Login to play</p>
+      <form method="get" action="play.html">
+        <label for="name">Name</label>
+        <input type="text" id="name" placeholder="Your name here" />
+        <button type="submit">Login</button>
+      </form>
+    </main>
+
+    <footer>
+      <hr />
+      <span class="text-reset">Author Name(s)</span>
+      <br />
+      <a href="https://github.com/webprogramming260/simon-html">GitHub</a>
+    </footer>
+  </body>
+</html>
+```
+
+
+# Simon JS
+```const btnDescriptions = [
+  { file: 'sound1.mp3', hue: 120 },
+  { file: 'sound2.mp3', hue: 0 },
+  { file: 'sound3.mp3', hue: 60 },
+  { file: 'sound4.mp3', hue: 240 },
+];
+
+class Button {
+  constructor(description, el) {
+    this.el = el;
+    this.hue = description.hue;
+    this.sound = loadSound(description.file);
+    this.paint(25);
+  }
+
+  paint(level) {
+    const background = `hsl(${this.hue}, 100%, ${level}%)`;
+    this.el.style.backgroundColor = background;
+  }
+
+  async press(volume = 1.0) {
+    return new Promise(async (pressResolve) => {
+      this.paint(50);
+      await this.playSound(volume);
+      this.paint(25);
+      pressResolve();
+    });
+  }
+
+  async playSound(volume) {
+    return new Promise((playResolve) => {
+      this.sound.volume = volume;
+      this.sound.onended = playResolve;
+      this.sound.play();
+    });
+  }
+}
+
+class Game {
+  buttons;
+  allowPlayer;
+  sequence;
+  playerPlaybackPos;
+  mistakeSound;
+
+  constructor() {
+    this.buttons = new Map();
+    this.allowPlayer = false;
+    this.sequence = [];
+    this.playerPlaybackPos = 0;
+    this.mistakeSound = loadSound('error.mp3');
+
+    document.querySelectorAll('.game-button').forEach((el, i) => {
+      if (i < btnDescriptions.length) {
+        this.buttons.set(el.id, new Button(btnDescriptions[i], el));
+      }
+    });
+
+    const playerNameEl = document.querySelector('.player-name');
+    playerNameEl.textContent = this.getPlayerName();
+  }
+
+  async pressButton(button) {
+    if (this.allowPlayer) {
+      this.allowPlayer = false;
+      await this.buttons.get(button.id).press(1.0);
+
+      if (this.sequence[this.playerPlaybackPos].el.id === button.id) {
+        this.playerPlaybackPos++;
+        if (this.playerPlaybackPos === this.sequence.length) {
+          this.playerPlaybackPos = 0;
+          this.addButton();
+          this.updateScore(this.sequence.length - 1);
+          await this.playSequence();
+        }
+        this.allowPlayer = true;
+      } else {
+        this.saveScore(this.sequence.length - 1);
+        this.mistakeSound.play();
+        await this.buttonDance(2);
+      }
+    }
+  }
+
+  async reset() {
+    this.allowPlayer = false;
+    this.playerPlaybackPos = 0;
+    this.sequence = [];
+    this.updateScore('--');
+    await this.buttonDance(1);
+    this.addButton();
+    await this.playSequence();
+    this.allowPlayer = true;
+  }
+
+  getPlayerName() {
+    return localStorage.getItem('userName') ?? 'Mystery player';
+  }
+
+  async playSequence() {
+    await delay(500);
+    for (const btn of this.sequence) {
+      await btn.press(1.0);
+      await delay(100);
+    }
+  }
+
+  addButton() {
+    const btn = this.getRandomButton();
+    this.sequence.push(btn);
+  }
+
+  updateScore(score) {
+    const scoreEl = document.querySelector('#score');
+    scoreEl.textContent = score;
+  }
+
+  async buttonDance(laps = 1) {
+    for (let step = 0; step < laps; step++) {
+      for (const btn of this.buttons.values()) {
+        await btn.press(0.0);
+      }
+    }
+  }
+
+  getRandomButton() {
+    let buttons = Array.from(this.buttons.values());
+    return buttons[Math.floor(Math.random() * this.buttons.size)];
+  }
+
+  saveScore(score) {
+    const userName = this.getPlayerName();
+    let scores = [];
+    const scoresText = localStorage.getItem('scores');
+    if (scoresText) {
+      scores = JSON.parse(scoresText);
+    }
+    scores = this.updateScores(userName, score, scores);
+
+    localStorage.setItem('scores', JSON.stringify(scores));
+  }
+
+  updateScores(userName, score, scores) {
+    const date = new Date().toLocaleDateString();
+    const newScore = { name: userName, score: score, date: date };
+
+    let found = false;
+    for (const [i, prevScore] of scores.entries()) {
+      if (score > prevScore.score) {
+        scores.splice(i, 0, newScore);
+        found = true;
+        break;
+      }
+    }
+
+    if (!found) {
+      scores.push(newScore);
+    }
+
+    if (scores.length > 10) {
+      scores.length = 10;
+    }
+
+    return scores;
+  }
+}
+
+const game = new Game();
+
+function delay(milliseconds) {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(true);
+    }, milliseconds);
+  });
+}
+
+function loadSound(filename) {
+  return new Audio('assets/' + filename);
+}
+
+// Simulate chat messages that will come over WebSocket
+setInterval(() => {
+  const score = Math.floor(Math.random() * 3000);
+  const chatText = document.querySelector('#player-messages');
+  chatText.innerHTML =
+    `<div class="event"><span class="player-event">Eich</span> scored ${score}</div>` +
+    chatText.innerHTML;
+}, 5000);
+```
+
+
+margin - border - padding - content
