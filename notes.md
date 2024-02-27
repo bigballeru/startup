@@ -12,9 +12,6 @@ Created an AWS server instance. It is running nonstop. Should be free. I also go
 
 Today I got the domain name **mypeoplenotes.com**. I then attached it to my ip address. I did this through Route 53 on AWS. I purchased the domain then I went to my domain name and added records. I used the ip address and also made it so all subdomains will use the same ip address.
 
-![Alt text](image.png)
-!["Yeah"](image-1.png)
-![Alt text](image-2.png)
 
 
 ## NOTES
