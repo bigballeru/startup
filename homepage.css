@@ -154,6 +154,16 @@ main section div nav {
     text-emphasis: bold;
 }
 
+.notebox h4 {
+    font-size: smaller;
+    text-decoration: underline;
+}
+
+.notebox p {
+    font-size: small;
+    font-style: italic;
+}
+
 footer {
     display: flex;
     border-top: 1px solid rgb(229, 231, 235);
@@ -161,6 +171,10 @@ footer {
     align-items: center;
     justify-content: center;
     background-color: rgb(250, 251, 251);
+    /* position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0; */
 }
 
 footer p {

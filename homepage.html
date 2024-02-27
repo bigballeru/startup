@@ -7,6 +7,7 @@
         <title>Homepage</title>
     
         <link rel="stylesheet" href="homepage.css" />
+        <script src="homepage.js"></script>
     
         <!-- Include bootstrap CSS framework -->
         <link
@@ -30,9 +31,9 @@
                 </div>
                 <div id="list">
                     <nav>
-                        <a href="javascript:void(0)">John Doe</a>
-                        <a href="javascript:void(0)">Jane Smith</a>
-                        <a href="javascript:void(0)">Bob Johnson</a>
+                        <a>John Doe</a>
+                        <a>Jane Smith</a>
+                        <a>Bob Johnson</a>
                     </nav>
                 </div>
                 <div id="websocket">
@@ -49,16 +50,24 @@
                 </div>
                 <div class="notebox">
                     <h3>Contact Details</h3>
-                    <p>This will come from the database</p>
+                    <h4>Phone Number</h4>
+                    <p id="phone">801-312-4174</p>
+                    <h4>Email</h4>
+                    <p id="email">john.doe@gmail.com</p>
+                    <h4>Address</h4>
+                    <p id="address">123 Main Street<br>Provo, UT 84321</p>
                 </div>
                 <div class="notebox">
                     <h3>Main Details</h3>
-                    <p>This wil come from the database</p>
+                    <h4>Career</h4>
+                    <p id="career">John is going to work at MS MP this summer. He is planning on that for a few years then moving to PE</p>
+                    <h4>Family</h4>
+                    <p id="family">John is married to Caroline. They will have their first kid in just a few months</p>
                 </div>
             </section>
         </main>
         <footer>
-            <p>Here is a random inspirational quote that I use an API to call</p>
+            <p id="quote">Here is a random inspirational quote that I use an API to call</p>
         </footer>
     </body>
 
