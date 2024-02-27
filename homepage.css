@@ -118,8 +118,21 @@ main section div nav {
     border-radius: 50%;
 }
 
+#metainfo {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
 #person h2 {
     align-self: center;
+    margin-bottom: 0px;
+}
+
+#person h3 {
+    font-size: small;
+    align-self: center;
+    font-style: italic;
 }
 
 #notes div #list {

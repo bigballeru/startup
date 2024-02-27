@@ -7,6 +7,7 @@
         <title>Login Page</title>
     
         <link rel="stylesheet" href="main.css" />
+        <script src="login.js"></script>
     
         <!-- Include bootstrap CSS framework -->
         <link
@@ -25,9 +26,9 @@
             <div id="login">
                 <h2>Login</h2>
                 <form>
-                    <input type="email" placeholder="Email">
+                    <input type="email" id="email" placeholder="Email">
                     <input type="password" placeholder="Password">
-                    <button type="button"><a href="homepage.html">Login</a></button>
+                    <button type="button" onclick="login()">Login</button>
                 </form>
                 <p>
                     Don't have an account?
