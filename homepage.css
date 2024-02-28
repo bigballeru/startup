@@ -47,6 +47,12 @@ main {
     border-right: 1px solid rgb(229, 231, 235);
     background-color: rgb(250, 251, 251);
     position: relative;
+    overflow-y: auto;
+    max-height: 84vh; /* Adjust based on your layout's needs */
+}
+
+#list {
+    overflow-y: auto;
 }
 
 #head {
@@ -89,6 +95,7 @@ main section div nav {
     border-radius: 0.5rem;
     background-color: white;
     cursor: pointer;
+    
 }
 
 #websocket {
