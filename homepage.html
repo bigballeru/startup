@@ -27,13 +27,42 @@
             <section id="people">
                 <div id="head">
                     <h2>People</h2>
-                    <button>Add</button>
+                    <button id="addPersonBtn">Add</button>
+                        <!-- The Modal -->
+                        <div id="addPersonModal" class="modal">
+                            <!-- Modal content -->
+                            <div class="modal-content">
+                                <span class="close">&times;</span>
+                                <form id="addPersonForm">
+                                <div class="modal-sep">
+                                    <h2>How I Know Them</h2>
+                                    <input type="text" id="name" name="name" placeholder="Name" required>
+                                    <input type="text" id="meta" name="age" placeholder="How You Know Them" required>
+                                </div>
+                                <div class="modal-sep">
+                                    <h2>Contact Details</h2>
+                                    <input type="tel" id="phoneform" name="phone" placeholder="Phone Number">
+                                    <input type="email" id="emailform" name="email" placeholder="Email">
+                                    <input type="text" id="addressform" name="address" placeholder="Address">
+                                </div>
+                                <div class="modal-sep">
+                                    <h2>Main Details</h2>
+                                    <input type="text" id="careerform" name="career" placeholder="Career Info">
+                                    <input type="text" id="familyform" name="family" placeholder="Family Info">
+                                    <!-- Add other fields as necessary -->
+                                </div>
+                                <div class="modal-sep">
+                                    <input type="submit" value="Submit">
+                                </div>
+                                </form>
+                            </div>
+                        </div>
                 </div>
                 <div id="list">
                     <nav>
-                        <a>John Doe</a>
-                        <a>Jane Smith</a>
-                        <a>Bob Johnson</a>
+                        <h1>John Doe</h1>
+                        <h1>Jane Smith</h1>
+                        <h1>Bob Johnson</h1>
                     </nav>
                 </div>
                 <div id="websocket">
@@ -42,7 +71,7 @@
             </section>
             <section id="notes">
                 <div id="person">
-                    <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cmFuZG9tJTIwcGVvcGxlfGVufDB8fDB8fHww" width="100" height="100"/>
+                    <img src="https://static.vecteezy.com/system/resources/previews/031/725/956/large_2x/ai-generated-studio-portrait-of-handsome-indian-man-on-colour-background-photo.jpg" width="100" height="100"/>
                     <div id="metainfo">
                         <h2>John Doe</h2>
                         <h3>Jefferies</h3>

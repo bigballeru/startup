@@ -1,6 +1,6 @@
 const peopleDetails = {
     "John Doe": {
-        imgSrc: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cmFuZG9tJTIwcGVvcGxlfGVufDB8fDB8fHww",
+        imgSrc: "https://static.vecteezy.com/system/resources/previews/031/725/956/large_2x/ai-generated-studio-portrait-of-handsome-indian-man-on-colour-background-photo.jpg",
         name: "John Doe",
         meta: "Jefferies",
         contactDetails: {
@@ -43,8 +43,10 @@ const peopleDetails = {
     },
 };
 
-document.addEventListener('DOMContentLoaded', function() {
-    var links = document.querySelectorAll('#list nav a');
+const peopleArray = Object.values(peopleDetails);
+
+function linkPeople() {
+    var links = document.querySelectorAll('#list h1');
 
     links.forEach(function(link) {
         link.addEventListener('click', function() {
@@ -56,10 +58,17 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function updatePersonDetails(personName) {
         // Get the details for the clicked person
-        var details = peopleDetails[personName];
+        var details;
+
+        for (const person of peopleArray) {
+            if (person.name === personName) {
+                details = person;
+                break;
+            }
+        }
 
         // Update information showing
-        document.querySelector('#person img').src = details.imgSrc;
+        document.querySelector('#person img').src = details.imgSrc || 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Blue_question_mark_icon.svg/2048px-Blue_question_mark_icon.svg.png';
         document.querySelector('#person h2').textContent = details.name;
         document.querySelector('#person h3').textContent = details.meta;
         document.querySelector('#phone').textContent = details.contactDetails.phone;
@@ -68,7 +77,23 @@ document.addEventListener('DOMContentLoaded', function() {
         document.querySelector('#career').textContent = details.mainDetails.career;
         document.querySelector('#family').textContent = details.mainDetails.family;
     }
-});
+}
+
+function loadPeople() {
+    var container = document.getElementById('list');
+
+    document.getElementById('list').innerHTML = '';
+
+    peopleArray.forEach(function(person) {
+        var h1 = document.createElement('h1');
+        h1.textContent = person.name;
+        container.appendChild(h1);
+    });
+
+    linkPeople();
+}
+
+document.addEventListener('DOMContentLoaded', loadPeople);
 
 fetch('https://quote-garden.onrender.com/api/v3/quotes/random')
   .then(response => {
@@ -81,3 +106,59 @@ fetch('https://quote-garden.onrender.com/api/v3/quotes/random')
     document.querySelector('#quote').textContent = `"${data.data[0].quoteText}"  -${data.data[0].quoteAuthor}`;
   })
   .catch(error => console.error('There was a problem with your fetch operation:', error));
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    var btn = document.getElementById('addPersonBtn');
+  
+    // Get the modal
+    var modal = document.getElementById('addPersonModal');
+  
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName('close')[0];
+  
+    // When the user clicks on the button, open the modal
+    btn.onclick = function() {
+      modal.style.display = 'block';
+    }
+  
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function() {
+      modal.style.display = 'none';
+    }
+  
+    window.onclick = function(event) {
+      if (event.target === modal) {
+        modal.style.display = 'none';
+      }
+    }
+  
+    // Get the form inside the modal
+    var form = document.getElementById('addPersonForm');
+  
+    // Handle the form submission
+    form.onsubmit = function(event) {
+      event.preventDefault(); // Prevent the default form submission
+      const newPerson = {
+        imgSrc: null,
+        name: form.name.value,
+        meta: form.meta.value,
+        contactDetails: {
+            phone: form.phone.value,
+            email: form.email.value,
+            address: form.address.value
+        },
+        mainDetails: {
+            career: form.career.value,
+            family: form.family.value
+        }
+    };
+
+    document.getElementById('addPersonForm').reset();
+    peopleArray.push(newPerson);
+    loadPeople();
+
+      modal.style.display = 'none';
+    };
+});
+  
