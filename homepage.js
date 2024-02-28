@@ -138,7 +138,7 @@ document.addEventListener('DOMContentLoaded', function() {
   
     // Handle the form submission
     form.onsubmit = function(event) {
-      event.preventDefault(); // Prevent the default form submission
+      event.preventDefault();
       const newPerson = {
         imgSrc: null,
         name: form.name.value,
@@ -155,6 +155,7 @@ document.addEventListener('DOMContentLoaded', function() {
     };
 
     document.getElementById('addPersonForm').reset();
+    peopleDetails[newPerson.name] = newPerson;
     peopleArray.push(newPerson);
     loadPeople();
 
