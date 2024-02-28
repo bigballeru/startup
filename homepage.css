@@ -194,7 +194,6 @@ footer p {
     background-color: rgba(0,0,0,0.4);
 }
 
-/* Modal Content */
 .modal-content {
     display: flex;
     position: absolute;
@@ -204,10 +203,10 @@ footer p {
     background-color: #fefefe;
     padding: 20px;
     border: 1px solid #888;
-    width: 50%; /* Set to 50% of the viewport width */
-    height: 50%; /* Set to 50% of the viewport height */
-    max-width: 600px; /* Maximum width */
-    max-height: 600px; /* Maximum height */
+    width: 50%;
+    height: 50%;
+    max-width: 600px;
+    max-height: 600px;
     box-sizing: border-box;
 }
 
@@ -217,7 +216,6 @@ footer p {
     align-items: center;
 }
 
-/* The Close Button */
 .close {
     color: #aaa;
     float: right;

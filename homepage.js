@@ -43,6 +43,24 @@ const peopleDetails = {
     },
 };
 
+function numPeople() {
+    setTimeout(function() {
+        toChange = document.querySelector('#websocket');
+        toChange.innerHTML = "Users: 10";
+    }, 5000);
+    setTimeout(function() {
+        toChange = document.querySelector('#websocket');
+        toChange.innerHTML = "Users: 8";
+    }, 10000);
+    setTimeout(function() {
+        toChange = document.querySelector('#websocket');
+        toChange.innerHTML = "Users: 21";
+    }, 15000);
+    numPeople();
+}
+
+numPeople();
+
 const peopleArray = Object.values(peopleDetails);
 
 function linkPeople() {

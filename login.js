@@ -4,4 +4,5 @@ function login() {
     localStorage.setItem("password", passwordEl.value)
     localStorage.setItem("email", nameEl.value);
     window.location.href = "homepage.html";
-  }
+}
+
