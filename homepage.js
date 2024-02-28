@@ -1,3 +1,4 @@
+
 const peopleDetails = {
     "John Doe": {
         imgSrc: "https://static.vecteezy.com/system/resources/previews/031/725/956/large_2x/ai-generated-studio-portrait-of-handsome-indian-man-on-colour-background-photo.jpg",
