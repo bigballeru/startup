@@ -60,3 +60,12 @@ For this deliverable I properly styled the application into its final appearance
 - **Application elements** - I tried to use good coloring and whitespace so it looks nice and clean.
 - **Application text content** - I put in the bootstrap CSS, so there are consistent fonts throughout it.
 - **Application images** - Just style my image as a circle like I would find it in a contacts app.
+
+## JavaScript deliverable
+
+For this deliverable I implemented by JavaScript so that the application works for a single user. I also added placeholders for future technology.
+
+- **login** - When you press login, it takes you to the homepage. I also created a modal for creating accounts.
+- **database** - Display the people I have notes for. Right now, it is all saved in a map, so it doesn't persist. Will persist once we start using the database.
+- **WebSocket** - I used the setInterval function to periodically change the number of users. This will be replaced with WebSocket messages later.
+- **application logic** - I can add people with the + button on my website. It opens a modal that has a form inside of it.
