@@ -1,49 +1,39 @@
+let mapOfPeople = new Map();
 
-const peopleDetails = {
-    "John Doe": {
-        imgSrc: "https://static.vecteezy.com/system/resources/previews/031/725/956/large_2x/ai-generated-studio-portrait-of-handsome-indian-man-on-colour-background-photo.jpg",
-        name: "John Doe",
-        meta: "Jefferies",
-        contactDetails: {
-            phone: "801-312-4174",
-            email: "john.doe@gmail.com",
-            address: "123 Main Street Provo, UT 84321"
-        },
-        mainDetails: {
-            career: "John is going to work at MS MP this summer...",
-            family: "John is married to Caroline..."
-        }
+const johnDoe = {
+    imgSrc: "https://static.vecteezy.com/system/resources/previews/031/725/956/large_2x/ai-generated-studio-portrait-of-handsome-indian-man-on-colour-background-photo.jpg",
+    name: "John Doe",
+    meta: "Jefferies",
+    contactDetails: {
+        phone: "801-312-4174",
+        email: "john.doe@gmail.com",
+        address: "123 Main Street Provo, UT 84321"
     },
-    "Jane Smith": {
-        imgSrc: "https://www.befunky.com/images/wp/wp-2021-01-linkedin-profile-picture-after.jpg?auto=avif,webp&format=jpg&width=944",
-        name: "Jane Smith",
-        meta: "Smith Corporation",
-        contactDetails: {
-            phone: "801-312-4174",
-            email: "jane.smith@gmail.com",
-            address: "123 New Avenue Draper, UT 84321"
-        },
-        mainDetails: {
-            career: "Jane just got married",
-            family: "Jane has two children."
-        }
-    },
-    "Bob Johnson": {
-        imgSrc: "https://img.freepik.com/free-photo/portrait-man-laughing_23-2148859448.jpg?size=338&ext=jpg&ga=GA1.1.967060102.1708905600&semt=ais",
-        name: "Bob Johnson",
-        meta: "BYU",
-        contactDetails: {
-            phone: "727-712-8192",
-            email: "bjohnson@gmail.com",
-            address: "600 Penn Avenue Las Vegas, NV 84321"
-        },
-        mainDetails: {
-            career: "Bob is an absolute dog",
-            family: "Bob loves to eat good food"
-        }
-    },
+    mainDetails: {
+        career: "John is going to work at MS MP this summer...",
+        family: "John is married to Caroline..."
+    }
 };
 
+const janeSmith = {
+    imgSrc: "https://www.befunky.com/images/wp/wp-2021-01-linkedin-profile-picture-after.jpg?auto=avif,webp&format=jpg&width=944",
+    name: "Jane Smith",
+    meta: "Smith Corporation",
+    contactDetails: {
+        phone: "801-312-4174",
+        email: "jane.smith@gmail.com",
+        address: "123 New Avenue Draper, UT 84321"
+    },
+    mainDetails: {
+        career: "Jane just got married",
+        family: "Jane has two children."
+    }
+};
+
+mapOfPeople.set("John Doe", johnDoe);
+mapOfPeople.set("Jane Smith", janeSmith);
+
+// Fakes websocket functionality
 function numPeople() {
     setTimeout(function() {
         toChange = document.querySelector('#websocket');
@@ -57,16 +47,13 @@ function numPeople() {
         toChange = document.querySelector('#websocket');
         toChange.innerHTML = "Users: 21";
     }, 15000);
-    numPeople();
 }
 
-numPeople();
-
-const peopleArray = Object.values(peopleDetails);
-
+// Turning list of people into links that pull up their info
 function linkPeople() {
     var links = document.querySelectorAll('#list h1');
 
+    // Adds the links for all the people with h1 tags
     links.forEach(function(link) {
         link.addEventListener('click', function() {
             var personName = link.textContent;
@@ -77,14 +64,7 @@ function linkPeople() {
 
     function updatePersonDetails(personName) {
         // Get the details for the clicked person
-        var details;
-
-        for (const person of peopleArray) {
-            if (person.name === personName) {
-                details = person;
-                break;
-            }
-        }
+        var details = mapOfPeople.get(personName);
 
         // Update information showing
         document.querySelector('#person img').src = details.imgSrc || 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Blue_question_mark_icon.svg/2048px-Blue_question_mark_icon.svg.png';
@@ -98,36 +78,41 @@ function linkPeople() {
     }
 }
 
+// Loads the people list based off of who is in mapOfPeople
 function loadPeople() {
     var container = document.getElementById('list');
 
+    // Empties it before loading to not duplicate
     document.getElementById('list').innerHTML = '';
 
-    peopleArray.forEach(function(person) {
+    // Adds all of the people in mapOfPeople
+    mapOfPeople.forEach(function(person) {
         var h1 = document.createElement('h1');
         h1.textContent = person.name;
         container.appendChild(h1);
     });
 
+    // Calls linkPeople to link all the info again
     linkPeople();
 }
 
-document.addEventListener('DOMContentLoaded', loadPeople);
+// Loads my quote using the API
+function loadQuote() {
+    fetch('https://quote-garden.onrender.com/api/v3/quotes/random')
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    })
+    .then(data => {
+        document.querySelector('#quote').textContent = `"${data.data[0].quoteText}"  -${data.data[0].quoteAuthor}`;
+    })
+    .catch(error => console.error('There was a problem with your fetch operation:', error));
+}
 
-fetch('https://quote-garden.onrender.com/api/v3/quotes/random')
-  .then(response => {
-    if (!response.ok) {
-        throw new Error('Network response was not ok');
-    }
-    return response.json();
-  })
-  .then(data => {
-    document.querySelector('#quote').textContent = `"${data.data[0].quoteText}"  -${data.data[0].quoteAuthor}`;
-  })
-  .catch(error => console.error('There was a problem with your fetch operation:', error));
-
-
-document.addEventListener('DOMContentLoaded', function() {
+// Handles opening and closing the modal and also deals with form submissions
+function modalHandler() {
     var btn = document.getElementById('addPersonBtn');
   
     // Get the modal
@@ -157,28 +142,36 @@ document.addEventListener('DOMContentLoaded', function() {
   
     // Handle the form submission
     form.onsubmit = function(event) {
-      event.preventDefault();
-      const newPerson = {
-        imgSrc: null,
-        name: form.name.value,
-        meta: form.meta.value,
-        contactDetails: {
-            phone: form.phone.value,
-            email: form.email.value,
-            address: form.address.value
-        },
-        mainDetails: {
-            career: form.career.value,
-            family: form.family.value
-        }
-    };
+        event.preventDefault();
+        const newPerson = {
+            imgSrc: null,
+            name: form.name.value,
+            meta: form.meta.value,
+            contactDetails: {
+                phone: form.phone.value,
+                email: form.email.value,
+                address: form.address.value
+            },
+            mainDetails: {
+                career: form.career.value,
+                family: form.family.value
+            }
+        };
 
-    document.getElementById('addPersonForm').reset();
-    peopleDetails[newPerson.name] = newPerson;
-    peopleArray.push(newPerson);
+        document.getElementById('addPersonForm').reset();
+        mapOfPeople.set(newPerson.name, newPerson);
+        loadPeople();
+
+        modal.style.display = 'none';
+    };
+}
+
+function runItAll() {
+    numPeople();
+    loadQuote();
     loadPeople();
+    modalHandler();
+    numPeople();
+}
 
-      modal.style.display = 'none';
-    };
-});
-  
+document.addEventListener('DOMContentLoaded', runItAll);
