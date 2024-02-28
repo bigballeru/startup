@@ -137,6 +137,11 @@ footer a {
     cursor: pointer;
 }
 
+#signupform {
+    color: rgb(0, 0, 238);
+    cursor: pointer;
+}
+
 @media (max-width: 768px) {
     form {
         padding: 1rem;
