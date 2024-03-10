@@ -1,38 +1,3 @@
-let mapOfPeople = new Map();
-
-const johnDoe = {
-    imgSrc: "https://static.vecteezy.com/system/resources/previews/031/725/956/large_2x/ai-generated-studio-portrait-of-handsome-indian-man-on-colour-background-photo.jpg",
-    name: "John Doe",
-    meta: "Jefferies",
-    contactDetails: {
-        phone: "801-312-4174",
-        email: "john.doe@gmail.com",
-        address: "123 Main Street Provo, UT 84321"
-    },
-    mainDetails: {
-        career: "John is going to work at MS MP this summer...",
-        family: "John is married to Caroline..."
-    }
-};
-
-const janeSmith = {
-    imgSrc: "https://www.befunky.com/images/wp/wp-2021-01-linkedin-profile-picture-after.jpg?auto=avif,webp&format=jpg&width=944",
-    name: "Jane Smith",
-    meta: "Smith Corporation",
-    contactDetails: {
-        phone: "801-312-4174",
-        email: "jane.smith@gmail.com",
-        address: "123 New Avenue Draper, UT 84321"
-    },
-    mainDetails: {
-        career: "Jane just got married",
-        family: "Jane has two children."
-    }
-};
-
-mapOfPeople.set("John Doe", johnDoe);
-mapOfPeople.set("Jane Smith", janeSmith);
-
 // Fakes websocket functionality
 function numPeople() {
     setTimeout(function() {
@@ -63,18 +28,29 @@ function linkPeople() {
     });
 
     function updatePersonDetails(personName) {
-        // Get the details for the clicked person
-        var details = mapOfPeople.get(personName);
+        const encodedName = encodeURIComponent(personName);
 
-        // Update information showing
-        document.querySelector('#person img').src = details.imgSrc || 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Blue_question_mark_icon.svg/2048px-Blue_question_mark_icon.svg.png';
-        document.querySelector('#person h2').textContent = details.name;
-        document.querySelector('#person h3').textContent = details.meta;
-        document.querySelector('#phone').textContent = details.contactDetails.phone;
-        document.querySelector('#email').textContent = details.contactDetails.email;
-        document.querySelector('#address').textContent = details.contactDetails.address;
-        document.querySelector('#career').textContent = details.mainDetails.career;
-        document.querySelector('#family').textContent = details.mainDetails.family;
+        fetch(`/people/${encodedName}`)
+            .then(response => {
+                // Check if the request was successful
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.json(); // Parse the JSON in the response
+            })
+            .then(details => {
+                document.querySelector('#person img').src = details.imgSrc || 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Blue_question_mark_icon.svg/2048px-Blue_question_mark_icon.svg.png';
+                document.querySelector('#person h2').textContent = details.name;
+                document.querySelector('#person h3').textContent = details.meta;
+                document.querySelector('#phone').textContent = details.contactDetails.phone;
+                document.querySelector('#email').textContent = details.contactDetails.email;
+                document.querySelector('#address').textContent = details.contactDetails.address;
+                document.querySelector('#career').textContent = details.mainDetails.career;
+                document.querySelector('#family').textContent = details.mainDetails.family;
+            })
+            .catch(error => {
+                console.error('Fetching person details failed:', error);
+            });
     }
 }
 
@@ -85,15 +61,25 @@ function loadPeople() {
     // Empties it before loading to not duplicate
     document.getElementById('list').innerHTML = '';
 
-    // Adds all of the people in mapOfPeople
-    mapOfPeople.forEach(function(person) {
-        var h1 = document.createElement('h1');
-        h1.textContent = person.name;
-        container.appendChild(h1);
-    });
-
-    // Calls linkPeople to link all the info again
-    linkPeople();
+    fetch(`/people`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(people => {
+            people.forEach(function(person) {
+                var h1 = document.createElement('h1');
+                h1.textContent = person.name;
+                container.appendChild(h1);
+            })
+            // Calls linkPeople to link all the info again
+            linkPeople();
+        })
+        .catch(error => {
+            console.error('Fetching person details failed:', error);
+        });
 }
 
 // Loads my quote using the API
