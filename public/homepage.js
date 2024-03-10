@@ -68,13 +68,14 @@ function loadPeople() {
             }
             return response.json();
         })
-        .then(people => {
+        .then(data => {
+            // Convert the object to an array of its values
+            const people = Object.values(data);
             people.forEach(function(person) {
                 var h1 = document.createElement('h1');
                 h1.textContent = person.name;
                 container.appendChild(h1);
-            })
-            // Calls linkPeople to link all the info again
+            });
             linkPeople();
         })
         .catch(error => {
@@ -85,16 +86,16 @@ function loadPeople() {
 // Loads my quote using the API
 function loadQuote() {
     fetch('https://quote-garden.onrender.com/api/v3/quotes/random')
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-        return response.json();
-    })
-    .then(data => {
-        document.querySelector('#quote').textContent = `"${data.data[0].quoteText}"  -${data.data[0].quoteAuthor}`;
-    })
-    .catch(error => console.error('There was a problem with your fetch operation:', error));
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            document.querySelector('#quote').textContent = `"${data.data[0].quoteText}"  -${data.data[0].quoteAuthor}`;
+        })
+        .catch(error => console.error('There was a problem with your fetch operation:', error));
 }
 
 // Handles opening and closing the modal and also deals with form submissions
@@ -144,10 +145,29 @@ function modalHandler() {
             }
         };
 
-        document.getElementById('addPersonForm').reset();
-        mapOfPeople.set(newPerson.name, newPerson);
-        loadPeople();
+        fetch('/people', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(newPerson),
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.text();
+            })
+            .then((result) => {
+                console.log(result);
+                // Reload/update the people list to reflect the addition/update
+                loadPeople();
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
 
+        form.reset();
         modal.style.display = 'none';
     };
 }
