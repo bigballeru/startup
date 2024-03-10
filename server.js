@@ -66,6 +66,11 @@ app.post('/people', (req, res) => {
   }
 });
 
+app.post('/login', (req, res) => {
+    // Will update this next project
+    res.send(`Login worked.`)
+});
+
 // Start the server
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);

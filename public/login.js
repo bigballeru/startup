@@ -1,10 +1,34 @@
 function login() {
     const nameEl = document.querySelector("#username");
     const passwordEl = document.querySelector("#password");
-    localStorage.setItem("password", passwordEl.value)
-    localStorage.setItem("email", nameEl.value);
+    
+    fetch('/login', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            username: nameEl.value,
+            password: passwordEl.value,
+        }),
+    })
+      .then(response => {
+          if (!response.ok) {
+              throw new Error('Login failed');
+          }
+          return response.json();
+      })
+      .then(data => {
+          console.log('Login successful', data);
+          window.location.href = "homepage.html";
+      })
+      .catch(error => {
+          console.error('Error:', error);
+      });
+
     window.location.href = "homepage.html";
 }
+
 
 function modalHandler() {
   var toClick = document.getElementById('signupform');
