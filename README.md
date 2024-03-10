@@ -6,10 +6,10 @@ You remember someone, but you can't quite get their name? Or they told you somet
 ## Design
 
 ### Login Page
-![login page](/Login%20Page.png)
+![login page](/public/assetsLogin%20Page.png)
 
 ### Main Page
-![main and only page](/Basic%20Website%20Outline.png)
+![main and only page](/public/assets//Basic%20Website%20Outline.png)
 
 ## Key Features
 * Secure login through HTTPS
