@@ -69,3 +69,13 @@ For this deliverable I implemented by JavaScript so that the application works f
 - **database** - Display the people I have notes for. Right now, it is all saved in a map, so it doesn't persist. Will persist once we start using the database.
 - **WebSocket** - I used the setInterval function to periodically change the number of users. This will be replaced with WebSocket messages later.
 - **application logic** - I can add people with the + button on my website. It opens a modal that has a form inside of it.
+
+## Service deliverable
+
+For this deliverable I added backend endpoints that receives votes and returns the voting totals.
+
+- **Node.js/Express HTTP service** - done!
+- **Static middleware for frontend** - done!
+- **Calls to third party endpoints** - Calls a free github quote API and displays quote on bottom of page.
+- **Backend service endpoints** - Endpoints for registering and logging in users. Also created endpoints for storing and getting people.
+- **Frontend calls service endpoints** - I did this using the fetch function.
