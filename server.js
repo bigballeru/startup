@@ -71,6 +71,11 @@ app.post('/login', (req, res) => {
     res.send(`Login worked.`)
 });
 
+app.post('/register', (req, res) => {
+    const userName = req.params.username;
+    const password = req.params.password;
+});
+
 // Start the server
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
