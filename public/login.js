@@ -62,10 +62,27 @@ function modalHandler() {
   form.onsubmit = function(event) {
       event.preventDefault();
       const newUser = {
-          username: form.username.value,
+          userName: form.username.value,
           password: form.password.value,
       };
 
+      fetch('/register', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: json.stringify(newUser),
+      })
+          .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.text();
+          })
+          .catch((error) => {
+              console.error('Error:', error);
+          });
+      
       modal.style.display = 'none';
   };
 }
