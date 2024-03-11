@@ -34,6 +34,8 @@ let people = {
     }
 };
 
+let users = {};
+
 // Use express.json() to parse JSON bodies
 app.use(express.json());
 
@@ -72,8 +74,8 @@ app.post('/login', (req, res) => {
 });
 
 app.post('/register', (req, res) => {
-    const userName = req.params.username;
-    const password = req.params.password;
+    const { userName, password } = req.body;
+    res.json({ message: 'User registered successfully' });
 });
 
 // Start the server
