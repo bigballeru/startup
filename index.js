@@ -1,7 +1,7 @@
 const express = require('express');
 
 const app = express();
-const PORT = process.argv.length > 2 ? parseInt(process.argv[2], 10) : 3000;
+const PORT = process.argv.length > 2 ? parseInt(process.argv[2], 10) : 4000;
 
 let people = {
     "John Doe": {
