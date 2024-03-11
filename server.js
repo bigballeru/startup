@@ -76,6 +76,7 @@ app.post('/login', (req, res) => {
 app.post('/register', (req, res) => {
     const { userName, password } = req.body;
     users[userName] = {userName, password};
+    console.log(users);
     res.json({ message: 'User registered successfully' });
 });
 
