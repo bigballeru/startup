@@ -30,27 +30,57 @@ function linkPeople() {
     function updatePersonDetails(personName) {
         const encodedName = encodeURIComponent(personName);
 
+        // fetch(`/people/${encodedName}`)
+        //     .then(response => {
+        //         // Check if the request was successful
+        //         if (!response.ok) {
+        //             throw new Error(`HTTP error! status: ${response.status}`);
+        //         }
+        //         return response.json(); // Parse the JSON in the response
+        //     })
+        //     .then(details => {
+        //         document.querySelector('#person img').src = details.imgSrc || 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Blue_question_mark_icon.svg/2048px-Blue_question_mark_icon.svg.png';
+        //         document.querySelector('#person h2').textContent = details.name;
+        //         document.querySelector('#person h3').textContent = details.meta;
+        //         document.querySelector('#phone').textContent = details.contactDetails.phone;
+        //         document.querySelector('#email').textContent = details.contactDetails.email;
+        //         document.querySelector('#address').textContent = details.contactDetails.address;
+        //         document.querySelector('#career').textContent = details.mainDetails.career;
+        //         document.querySelector('#family').textContent = details.mainDetails.family;
+        //     })
+        //     .catch(error => {
+        //         console.error('Fetching person details failed:', error);
+        //     });
+            
         fetch(`/people/${encodedName}`)
-            .then(response => {
-                // Check if the request was successful
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
+        .then(response => {
+            if (!response.ok) {
+                if (response.status === 401) {
+                    return response.json().then(data => {
+                        if (data.redirectTo) {
+                            window.location.href = data.redirectTo;
+                        }
+                        throw new Error('Unauthorized access');
+                    });
                 }
-                return response.json(); // Parse the JSON in the response
-            })
-            .then(details => {
-                document.querySelector('#person img').src = details.imgSrc || 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Blue_question_mark_icon.svg/2048px-Blue_question_mark_icon.svg.png';
-                document.querySelector('#person h2').textContent = details.name;
-                document.querySelector('#person h3').textContent = details.meta;
-                document.querySelector('#phone').textContent = details.contactDetails.phone;
-                document.querySelector('#email').textContent = details.contactDetails.email;
-                document.querySelector('#address').textContent = details.contactDetails.address;
-                document.querySelector('#career').textContent = details.mainDetails.career;
-                document.querySelector('#family').textContent = details.mainDetails.family;
-            })
-            .catch(error => {
-                console.error('Fetching person details failed:', error);
-            });
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(details => {
+            document.querySelector('#person img').src = details.imgSrc || 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Blue_question_mark_icon.svg/2048px-Blue_question_mark_icon.svg.png';
+            document.querySelector('#person h2').textContent = details.name;
+            document.querySelector('#person h3').textContent = details.meta;
+            document.querySelector('#phone').textContent = details.contactDetails.phone;
+            document.querySelector('#email').textContent = details.contactDetails.email;
+            document.querySelector('#address').textContent = details.contactDetails.address;
+            document.querySelector('#career').textContent = details.mainDetails.career;
+            document.querySelector('#family').textContent = details.mainDetails.family;
+        })
+        .catch(error => {
+            console.error('Fetching person details failed:', error);
+        });
+        
     }
 }
 
@@ -64,9 +94,17 @@ function loadPeople() {
     fetch(`/people`)
         .then(response => {
             if (!response.ok) {
+                if (response.status === 401) {
+                    return response.json().then(data => {
+                        if (data.redirectTo) {
+                            window.location.href = data.redirectTo;
+                        }
+                        throw new Error('Unauthorized access');
+                    });
+                }
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
-            return response.json();
+            return response.json(); // Parse the JSON in the response
         })
         .then(data => {
             // Convert the object to an array of its values
@@ -154,9 +192,18 @@ function modalHandler() {
         })
             .then(response => {
                 if (!response.ok) {
+                    if (response.status === 401) {
+                        // Handle unauthorized access specifically
+                        return response.json().then(data => {
+                            if (data.redirectTo) {
+                                window.location.href = data.redirectTo; // Perform redirection
+                            }
+                            // Optional: throw an error or handle 401 without redirect information differently
+                            throw new Error('Unauthorized access');
+                        });
+                    }
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
-                return response.text();
             })
             .then((result) => {
                 console.log(result);

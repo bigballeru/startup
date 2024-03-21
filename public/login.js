@@ -1,6 +1,6 @@
 function login() {
-    const nameEl = document.querySelector("#username");
-    const passwordEl = document.querySelector("#password");
+    const name = document.querySelector("#username");
+    const password = document.querySelector("#password");
     
     fetch('/login', {
         method: 'POST',
@@ -8,8 +8,8 @@ function login() {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-            username: nameEl.value,
-            password: passwordEl.value,
+            username: name.value,
+            password: password.value,
         }),
     })
       .then(response => {
@@ -25,8 +25,6 @@ function login() {
       .catch(error => {
           console.error('Error:', error);
       });
-
-    window.location.href = "homepage.html";
 }
 
 
@@ -62,7 +60,7 @@ function modalHandler() {
   form.onsubmit = function(event) {
     event.preventDefault();
     const newUser = {
-        userName: form.username.value,
+        username: form.username.value,
         password: form.password.value,
     };
 
