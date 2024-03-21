@@ -79,3 +79,14 @@ For this deliverable I added backend endpoints that receives votes and returns t
 - **Calls to third party endpoints** - Calls a free github quote API and displays quote on bottom of page.
 - **Backend service endpoints** - Endpoints for registering and logging in users. Also created endpoints for storing and getting people.
 - **Frontend calls service endpoints** - I did this using the fetch function.
+
+## DB/Login deliverable
+
+For this deliverable I associate the people notes with the logged in user. I store the users and their people in a database.
+
+- **MongoDB Atlas database created** - done!
+- **Stores data in MongoDB** - done!
+- **User registration** - Creates a new object with the username, password, authToken and people in the database.
+- **Existing user** - They can login with both their password and username.
+- **Use MongoDB to store credentials** - Stores users authTokens which are then handed off to cookies.
+- **Restricts functionality** - You can't add people or get people until you have logged in. This is restricted via cookies. I also made it so cookies expire after an hour. Finally, if they try to do something on homepage.html without a valid cookie, it automatically directs them to index.html.
