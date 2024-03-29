@@ -90,3 +90,12 @@ For this deliverable I associate the people notes with the logged in user. I sto
 - **Existing user** - They can login with both their password and username.
 - **Use MongoDB to store credentials** - Stores users authTokens which are then handed off to cookies.
 - **Restricts functionality** - You can't add people or get people until you have logged in. This is restricted via cookies. I also made it so cookies expire after an hour. Finally, if they try to do something on homepage.html without a valid cookie, it automatically directs them to index.html.
+
+## WebSocket deliverable
+
+For this deliverable I used webSocket to update the votes on the frontend in realtime.
+
+- **Backend listens for WebSocket connection** - done!
+- **Frontend makes WebSocket connection** - done!
+- **Data sent over WebSocket connection** - done!
+- **WebSocket data displayed** - Shows the amount of users in real time. Works great.
