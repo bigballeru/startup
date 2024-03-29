@@ -2,6 +2,8 @@ const express = require('express');
 const cookieParser = require('cookie-parser');
 const DB = require('./database.js');
 const bcrypt = require('bcrypt');
+const http = require('http');
+const { peerProxy } = require('./peerProxy.js');
 
 const app = express();
 const PORT = process.argv.length > 2 ? parseInt(process.argv[2], 10) : 4000;
@@ -96,6 +98,9 @@ function setAuthCookie(res, authToken) {
 }
 
 // Start the server
-app.listen(PORT, () => {
+const server = http.createServer(app);
+server.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });
+
+peerProxy(server);
