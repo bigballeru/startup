@@ -235,7 +235,6 @@ function runItAll() {
     loadQuote();
     loadPeople();
     modalHandler();
-    numPeople();
 }
 
 document.addEventListener('DOMContentLoaded', runItAll);
