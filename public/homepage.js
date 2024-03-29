@@ -1,18 +1,29 @@
-// Fakes websocket functionality
 function numPeople() {
-    setTimeout(function() {
-        toChange = document.querySelector('#websocket');
-        toChange.innerHTML = "Users: 10";
-    }, 5000);
-    setTimeout(function() {
-        toChange = document.querySelector('#websocket');
-        toChange.innerHTML = "Users: 8";
-    }, 10000);
-    setTimeout(function() {
-        toChange = document.querySelector('#websocket');
-        toChange.innerHTML = "Users: 21";
-    }, 15000);
+    const protocol = window.location.protocol === 'http:' ? 'ws' : 'wss';
+    const socket = new WebSocket(`${protocol}://${window.location.host}/ws`);
+
+    socket.addEventListener('open', function(event) {
+        console.log('WebSocket connection established');
+    });
+
+    socket.addEventListener('message', function(event) {
+        const data = JSON.parse(event.data);
+        
+        if (data.type === 'userNumber') {
+            const toChange = document.querySelector('#websocket');
+            toChange.innerHTML = `Users: ${data.number}`;
+        }
+    });
+
+    socket.addEventListener('close', function(event) {
+        console.log('WebSocket connection closed');
+    });
+
+    socket.addEventListener('error', function(event) {
+        console.error('WebSocket error:', event);
+    });
 }
+
 
 // Turning list of people into links that pull up their info
 function linkPeople() {
