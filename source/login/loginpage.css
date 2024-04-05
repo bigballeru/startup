@@ -1,4 +1,4 @@
-body {
+#oldbody {
     font-family: 'Arial', sans-serif;
     background-color: rgb(243, 244, 246);
     margin: 0;
@@ -89,7 +89,6 @@ footer a {
 }
 
 .modal {
-    display: none;
     position: fixed;
     z-index: 1;
     left: 0;

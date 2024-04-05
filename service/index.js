@@ -13,11 +13,14 @@ app.use(express.json());
 
 app.use(cookieParser());
 
+// Create a router instance
+const apiRouter = express.Router();
+
 // Serve static files from the 'public' directory
 app.use(express.static('public'));
 
 // GET route to retrieve user data by name
-app.get('/people/:name', async (req, res) => {
+apiRouter.get('/people/:name', async (req, res) => {
   const user = await DB.getUserByToken(req.cookies.token);
   if (user) {
     const people = user.people;
@@ -32,7 +35,7 @@ app.get('/people/:name', async (req, res) => {
 });
 
 // GET route to retrieve all users
-app.get('/people', async (req, res) => {
+apiRouter.get('/people', async (req, res) => {
   const user = await DB.getUserByToken(req.cookies.token);
   if (user) {
     res.json(user.people);
@@ -42,7 +45,7 @@ app.get('/people', async (req, res) => {
 });
 
 // POST route to add or update user data
-app.post('/people', async (req, res) => {
+apiRouter.post('/people', async (req, res) => {
   const user = await DB.getUserByToken(req.cookies.token);
   if (user) {
     const person = req.body;
@@ -58,7 +61,7 @@ app.post('/people', async (req, res) => {
   res.status(401).json({ redirectTo: 'index.html' });
 });
 
-app.post('/login', async (req, res) => {
+apiRouter.post('/login', async (req, res) => {
   const user = await DB.getUser(req.body.username);
   if (user) {
     if (await bcrypt.compare(req.body.password, user.password)) {
@@ -70,7 +73,7 @@ app.post('/login', async (req, res) => {
   res.status(401).send({ msg: 'Unauthorized' });
 });
 
-app.post('/register', async (req, res) => {
+apiRouter.post('/register', async (req, res) => {
   if (await DB.getUser(req.body.username)) {
     res.status(409).send({ msg: 'Existing user' });
   } else {
@@ -96,6 +99,9 @@ function setAuthCookie(res, authToken) {
     maxAge: expireTime
   });
 }
+
+// Use the router and prefix all its routes with "/api"
+app.use('/api', apiRouter);
 
 // Start the server
 const server = http.createServer(app);

@@ -1,22 +1,17 @@
 {
-  "name": "startup",
-  "version": "1.0.0",
-  "description": "## Elevator Pitch You remember someone, but you can't quite get their name? Or they told you something big last time you saw, but you can't quite remember what it was? Or you just want to know something more basic like who they know that you know? Back in the day, we used to use Rolodexes to sort all of our info. Now we use the Contacts app. But it is not quite the same. **mypeoplenotes.com** is a modern Rolodex allowing for easy keeping of notes and info of people that you know, but don't see all that often.",
-  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js"
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "devDependencies": {
+    "vite": "^5.2.7"
+  },
   "dependencies": {
-    "bcrypt": "^5.1.1",
-    "body-parser": "^1.20.2",
-    "cookie-parser": "^1.4.6",
-    "express": "^4.18.3",
-    "mongodb": "^6.5.0",
-    "uuid": "^9.0.1",
-    "ws": "^8.16.0"
+    "bootstrap": "^5.3.3",
+    "react": "^18.2.0",
+    "react-bootstrap": "^2.10.2",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.22.3"
   }
 }
