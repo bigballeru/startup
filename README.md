@@ -99,3 +99,12 @@ For this deliverable I used webSocket to update the votes on the frontend in rea
 - **Frontend makes WebSocket connection** - done!
 - **Data sent over WebSocket connection** - done!
 - **WebSocket data displayed** - Shows the amount of users in real time. Works great.
+
+## React deliverable
+
+For this deliverable I converted the application over to use React.
+
+- **Bundled using Vite** - done!
+- **Components** - Login and homepage are both seperate components.
+- **Router** - Routing between my login and homepage components. Little odd, but made it work.
+- **Hooks** - Used hooks in both my login and homepage components.
