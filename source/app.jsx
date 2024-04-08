@@ -4,6 +4,7 @@ import LoginPage from './login/loginpage';
 
 function App() {
   // Initializes isLoggedIn based on sessionStorage
+  // Uses sessionStorage to keep track if they stay logged in through reloads
   const [isLoggedIn, setIsLoggedIn] = useState(
     sessionStorage.getItem('isLoggedIn') === 'true'
   );
