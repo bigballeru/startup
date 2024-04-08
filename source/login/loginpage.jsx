@@ -9,6 +9,7 @@ function LoginPage({ onLoginSuccess }) {
   const [newUsername, setNewUsername] = useState('');
   const [newPassword, setNewPassword] = useState('');
 
+  // useEffect basically just auto loads when the webiste starts up
   useEffect(() => {
     const handleOutsideClick = (event) => {
       if (event.target.id === 'addAccountModal') {
