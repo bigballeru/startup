@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import HomePage from './homepage/homepage';
 import LoginPage from './login/loginpage';
+import { BrowserRouter, Route, Redirect } from 'react-router-dom';
 
 function App() {
   // Initializes isLoggedIn based on sessionStorage
@@ -19,9 +20,16 @@ function App() {
   };
 
   return (
-    <div>
-      {!isLoggedIn ? <LoginPage onLoginSuccess={handleLoginSuccess} /> : <HomePage />}
-    </div>
+    <BrowserRouter>
+      <div>
+        <Route path="/login">
+          {isLoggedIn ? <Redirect to="/" /> : <LoginPage onLoginSuccess={handleLoginSuccess} />}
+        </Route>
+        <Route exact path="/">
+          {isLoggedIn ? <HomePage /> : <Redirect to="/login" />}
+        </Route>
+      </div>
+    </BrowserRouter>
   );
 }
 
