@@ -81,6 +81,7 @@ function LoginPage({ onLoginSuccess }) {
   };
 
   return (
+    // Changed from main to div, but not sure if necessary?
     <div id="oldbody">
       <header>
         <h1>mypeoplenotes.com</h1>
