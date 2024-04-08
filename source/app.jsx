@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import HomePage from './homepage/homepage';
 import LoginPage from './login/loginpage';
-import { BrowserRouter, Route, Redirect } from 'react-router-dom';
+import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
 
 function App() {
   // Initializes isLoggedIn based on sessionStorage
@@ -21,14 +21,10 @@ function App() {
 
   return (
     <BrowserRouter>
-      <div>
-        <Route path="/login">
-          {isLoggedIn ? <Redirect to="/" /> : <LoginPage onLoginSuccess={handleLoginSuccess} />}
-        </Route>
-        <Route exact path="/">
-          {isLoggedIn ? <HomePage /> : <Redirect to="/login" />}
-        </Route>
-      </div>
+      <Routes>
+        <Route path="/login" element={!isLoggedIn ? <LoginPage onLoginSuccess={handleLoginSuccess} /> : <Navigate to="/" replace />} />
+        <Route path="/" element={isLoggedIn ? <HomePage /> : <Navigate to="/login" replace />} />
+      </Routes>
     </BrowserRouter>
   );
 }
