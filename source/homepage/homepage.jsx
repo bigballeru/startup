@@ -30,6 +30,7 @@ const HomePage = () => {
     loadQuote();
   }, []);
 
+  // Get's the people so we can have a list of people
   const loadPeople = () => {
     fetch(`/api/people`)
       .then(response => response.json())
@@ -37,6 +38,7 @@ const HomePage = () => {
       .catch(error => console.error('Fetching people list failed:', error));
   };
 
+  // Let's me show the persons details
   const updatePersonDetails = (personName) => {
     const encodedName = encodeURIComponent(personName);
 
@@ -46,6 +48,7 @@ const HomePage = () => {
       .catch(error => console.error('Fetching person details failed:', error));
   };
 
+  // Quote Garden quote loader
   const loadQuote = () => {
     fetch('https://quote-garden.onrender.com/api/v3/quotes/random')
       .then(response => response.json())
