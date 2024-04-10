@@ -58,6 +58,7 @@ const HomePage = () => {
       .catch(error => console.error('There was a problem with your fetch operation:', error));
   };
 
+  // Let's me put in a new person
   const handleSubmit = (event) => {
     event.preventDefault();
     const newPerson = {
@@ -142,6 +143,7 @@ const HomePage = () => {
         <p id="quote" style={{padding: 0}}>{quote}</p>
       </footer>
       {isModalOpen && (
+        // Need to include if it is open or not here instead of in css for it to work properly
         <div id="addPersonModal" className="modal" style={{ display: isModalOpen ? 'block' : 'none' }}>
           <div className="modal-content" style={{height: 'auto', maxHeight: 'fit-content'}}>
             <span className="close" onClick={() => setIsModalOpen(false)}>&times;</span>

@@ -24,6 +24,7 @@ function LoginPage({ onLoginSuccess }) {
     };
   }, []);
 
+  // Tries to login and sees if it worked
   const handleLogin = async () => {
     try {
       const response = await fetch('/api/login', {
@@ -54,6 +55,7 @@ function LoginPage({ onLoginSuccess }) {
   const handleModalOpen = () => setIsModalVisible(true);
   const handleModalClose = () => setIsModalVisible(false);
   
+  // Let's me submit new users
   const handleSubmitNewUser = async (event) => {
     event.preventDefault();
     
